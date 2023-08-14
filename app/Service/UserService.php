@@ -25,19 +25,29 @@ class UserService extends CoreService
 
     public function formValidate($request)
     {
+        // dd($request['nik']);
         $rules = [
             //            'email' => 'required|min:1|unique:conf_users,email,NULL,id,deleted_at,NULL'
+            'nik' => 'required|unique:conf_users'
         ];
+        // dd($rules);
         $messages = [
-            'email.unique' => 'Email sudah terdaftar.',
+            'nik.unique' => 'Nik sudah terdaftar.',
         ];
-        $validator = Validator::make($request, $rules, $messages);
+        // $validator = Validator::make($request, $rules, $messages);
+        if ($request['id']) {
+            // dd('ada idnya');
+            return 0;
+        } else {
+            $cek = User::where('nik', $request['nik'])->first();
+            // dd($cek);
 
-        if ($validator->fails()) {
-            return [
-                'status' => 'error',
-                'message' => $messages
-            ];
+            if ($cek) {
+                return [
+                    'status' => 'error',
+                    'message' => $messages
+                ];
+            }
         }
         return 0;
     }
