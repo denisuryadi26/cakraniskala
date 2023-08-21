@@ -1,4 +1,12 @@
 <?php
+
+use App\Http\Controllers\Generator\PerguruanController;
+use App\Http\Controllers\Generator\ServiceController;
+use App\Http\Controllers\Generator\PengurusController;
+use App\Http\Controllers\Generator\SliderController;
+use App\Http\Controllers\Generator\GalleryController;
+use App\Http\Controllers\Generator\ContactController;
+use App\Http\Controllers\Generator\AboutController;
 use App\Http\Controllers\Generator\UnlatController;
 use App\Http\Controllers\Generator\SabukController;
 use App\Http\Controllers\Generator\AgamaController;
@@ -43,6 +51,12 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/services', [HomeController::class, 'services'])->name('services');
+Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/pengurus', [HomeController::class, 'pengurus'])->name('pengurus');
+// Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
 Route::get('/api-doc', [ApiDocController::class, 'index'])->name('api_doc');
 
 Auth::routes();
@@ -54,28 +68,84 @@ Route::group(['prefix' => 'administrator', 'middleware' => ['auth', 'roles']], f
     Route::get('/delete_file', [DashboardController::class, 'deleteFileContent'])->name('file_delete');
 
 
-    Route::group(['prefix'=>'unlats'], function () {
+    Route::group(['prefix' => 'perguruans'], function () {
+        Route::get('/', [PerguruanController::class, 'index'])->name('dashboard_perguruans');
+        Route::get('/get', [PerguruanController::class, 'get'])->name('dashboard_perguruans_detail');
+        Route::get('/delete', [PerguruanController::class, 'destroy'])->name('dashboard_perguruans_delete');
+        Route::post('/', [PerguruanController::class, 'store'])->name('dashboard_perguruans_post');
+        Route::get('/datatable.json', [PerguruanController::class, '__datatable'])->name('dashboard_perguruans_table');
+    });
+
+    Route::group(['prefix' => 'services'], function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('dashboard_services');
+        Route::get('/get', [ServiceController::class, 'get'])->name('dashboard_services_detail');
+        Route::get('/delete', [ServiceController::class, 'destroy'])->name('dashboard_services_delete');
+        Route::post('/', [ServiceController::class, 'store'])->name('dashboard_services_post');
+        Route::get('/datatable.json', [ServiceController::class, '__datatable'])->name('dashboard_services_table');
+    });
+
+    Route::group(['prefix' => 'penguruses'], function () {
+        Route::get('/', [PengurusController::class, 'index'])->name('dashboard_penguruses');
+        Route::get('/get', [PengurusController::class, 'get'])->name('dashboard_penguruses_detail');
+        Route::get('/delete', [PengurusController::class, 'destroy'])->name('dashboard_penguruses_delete');
+        Route::post('/', [PengurusController::class, 'store'])->name('dashboard_penguruses_post');
+        Route::get('/datatable.json', [PengurusController::class, '__datatable'])->name('dashboard_penguruses_table');
+    });
+
+    Route::group(['prefix' => 'sliders'], function () {
+        Route::get('/', [SliderController::class, 'index'])->name('dashboard_sliders');
+        Route::get('/get', [SliderController::class, 'get'])->name('dashboard_sliders_detail');
+        Route::get('/delete', [SliderController::class, 'destroy'])->name('dashboard_sliders_delete');
+        Route::post('/', [SliderController::class, 'store'])->name('dashboard_sliders_post');
+        Route::get('/datatable.json', [SliderController::class, '__datatable'])->name('dashboard_sliders_table');
+    });
+
+    Route::group(['prefix' => 'galleries'], function () {
+        Route::get('/', [GalleryController::class, 'index'])->name('dashboard_galleries');
+        Route::get('/get', [GalleryController::class, 'get'])->name('dashboard_galleries_detail');
+        Route::get('/delete', [GalleryController::class, 'destroy'])->name('dashboard_galleries_delete');
+        Route::post('/', [GalleryController::class, 'store'])->name('dashboard_galleries_post');
+        Route::get('/datatable.json', [GalleryController::class, '__datatable'])->name('dashboard_galleries_table');
+    });
+
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/', [ContactController::class, 'index'])->name('dashboard_contacts');
+        Route::get('/get', [ContactController::class, 'get'])->name('dashboard_contacts_detail');
+        Route::get('/delete', [ContactController::class, 'destroy'])->name('dashboard_contacts_delete');
+        Route::post('/', [ContactController::class, 'store'])->name('dashboard_contacts_post');
+        Route::get('/datatable.json', [ContactController::class, '__datatable'])->name('dashboard_contacts_table');
+    });
+
+    Route::group(['prefix' => 'abouts'], function () {
+        Route::get('/', [AboutController::class, 'index'])->name('dashboard_abouts');
+        Route::get('/get', [AboutController::class, 'get'])->name('dashboard_abouts_detail');
+        Route::get('/delete', [AboutController::class, 'destroy'])->name('dashboard_abouts_delete');
+        Route::post('/', [AboutController::class, 'store'])->name('dashboard_abouts_post');
+        Route::get('/datatable.json', [AboutController::class, '__datatable'])->name('dashboard_abouts_table');
+    });
+
+    Route::group(['prefix' => 'unlats'], function () {
         Route::get('/', [UnlatController::class, 'index'])->name('dashboard_unlats');
         Route::get('/get', [UnlatController::class, 'get'])->name('dashboard_unlats_detail');
         Route::get('/delete', [UnlatController::class, 'destroy'])->name('dashboard_unlats_delete');
         Route::post('/', [UnlatController::class, 'store'])->name('dashboard_unlats_post');
-        Route::get('/datatable.json', [UnlatController::class ,'__datatable'])->name('dashboard_unlats_table');
+        Route::get('/datatable.json', [UnlatController::class, '__datatable'])->name('dashboard_unlats_table');
     });
 
-    Route::group(['prefix'=>'sabuks'], function () {
+    Route::group(['prefix' => 'sabuks'], function () {
         Route::get('/', [SabukController::class, 'index'])->name('dashboard_sabuks');
         Route::get('/get', [SabukController::class, 'get'])->name('dashboard_sabuks_detail');
         Route::get('/delete', [SabukController::class, 'destroy'])->name('dashboard_sabuks_delete');
         Route::post('/', [SabukController::class, 'store'])->name('dashboard_sabuks_post');
-        Route::get('/datatable.json', [SabukController::class ,'__datatable'])->name('dashboard_sabuks_table');
+        Route::get('/datatable.json', [SabukController::class, '__datatable'])->name('dashboard_sabuks_table');
     });
 
-    Route::group(['prefix'=>'agamas'], function () {
+    Route::group(['prefix' => 'agamas'], function () {
         Route::get('/', [AgamaController::class, 'index'])->name('dashboard_agamas');
         Route::get('/get', [AgamaController::class, 'get'])->name('dashboard_agamas_detail');
         Route::get('/delete', [AgamaController::class, 'destroy'])->name('dashboard_agamas_delete');
         Route::post('/', [AgamaController::class, 'store'])->name('dashboard_agamas_post');
-        Route::get('/datatable.json', [AgamaController::class ,'__datatable'])->name('dashboard_agamas_table');
+        Route::get('/datatable.json', [AgamaController::class, '__datatable'])->name('dashboard_agamas_table');
     });
 
     Route::group(['prefix' => 'categories'], function () {
