@@ -89,7 +89,7 @@ class SliderService extends CoreService
             $filename = $directory . '/' . date('Y-m-d') . '-' . $this->random_string(20) . '.' . $file->extension();
 
             // No resizing, just move the uploaded image
-            $file->move(public_path() . '/storage/images/', $filename);
+            $file->move(public_path() . '/storage/images/slider/', $filename);
 
             return $filename;
         }
