@@ -69,21 +69,31 @@ class SliderService extends CoreService
         } else {
         }
 
+        // if ($request->hasFile('image')) {
+        //     // dd($request->file('image'));
+        //     $file = $request['image'];
+        //     $filename = $directory . '/' . date('Y-m-d') . '-' . $this->random_string(20) . '.' . $file->extension();
+
+        //     $width = 320; // your max width
+        //     $height = 320; // your max height
+        //     $image = $request->file('image');
+        //     $thumbImage = Image::make($image->getRealPath())->resize($width, $height, function ($constraint) {
+        //         $constraint->aspectRatio();
+        //     });
+        //     $thumbPath = public_path() . '/storage/images/' . $filename;
+        //     $thumbImage = Image::make($thumbImage)->save($thumbPath);
+        //     return $filename;
+        // };
         if ($request->hasFile('image')) {
-            // dd($request->file('image'));
-            $file = $request['image'];
+            $file = $request->file('image');
             $filename = $directory . '/' . date('Y-m-d') . '-' . $this->random_string(20) . '.' . $file->extension();
 
-            $width = 320; // your max width
-            $height = 320; // your max height
-            $image = $request->file('image');
-            $thumbImage = Image::make($image->getRealPath())->resize($width, $height, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $thumbPath = public_path() . '/storage/images/' . $filename;
-            $thumbImage = Image::make($thumbImage)->save($thumbPath);
+            // No resizing, just move the uploaded image
+            $file->move(public_path() . '/storage/images/', $filename);
+
             return $filename;
-        };
+        }
+
         return $slider;
     }
 
