@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link fw-bolder" href="contact">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bolder" href="login">Login</a>
+                </li>
             </ul>
         </div>
     </div>
