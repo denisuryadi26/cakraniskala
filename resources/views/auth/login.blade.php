@@ -36,13 +36,13 @@
                     <!-- Logo -->
                     <div class="auth-brand text-center text-lg-start">
                         <div class="auth-brand">
-                            <a href="index.html" class="logo logo-dark text-center">
+                            <a href="{{ route('login') }}" class="logo logo-dark text-center">
                                 <span class="logo-lg">
                                     <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="" height="22">
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light text-center">
+                            <a href="{{ route('login') }}" class="logo logo-light text-center">
                                 <span class="logo-lg">
                                     <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="" height="22">
                                 </span>

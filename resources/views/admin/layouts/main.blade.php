@@ -70,13 +70,13 @@
             <!-- Brand Logo -->
             <div class="logo-box">
                 <!-- Brand Logo Light -->
-                <a href="index.html" class="logo-light">
+                <a href="{{ route('dashboard') }}" class="logo-light">
                     <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="logo" class="logo-lg">
                     <img src="{{asset('ubold/assets/images/logo-sm-light-cn.png')}}" alt="small logo" class="logo-sm">
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a href="index.html" class="logo-dark">
+                <a href="{{ route('dashboard') }}" class="logo-dark">
                     <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="dark logo" class="logo-lg">
                     <img src="{{asset('ubold/assets/images/logo-sm-dark-cn.png')}}" alt="small logo" class="logo-sm">
                 </a>
