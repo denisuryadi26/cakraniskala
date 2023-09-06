@@ -120,11 +120,11 @@
         <!-- Auth fluid right content -->
         <div class="auth-fluid-right text-center">
             <div class="auth-user-testimonial">
-                <h2 class="mb-3 text-white">I love the color!</h2>
-                <p class="lead"><i class="mdi mdi-format-quote-open"></i> I've been using your theme from the previous developer for our web app, once I knew new version is out, I immediately bought with no hesitation. Great themes, good documentation with lots of customization available and sample app that really fit our need. <i class="mdi mdi-format-quote-close"></i>
+                <h2 class="mb-3 text-white">I love Silat!</h2>
+                <p class="lead"><i class="mdi mdi-format-quote-open"></i> Saya tidak takut pada orang yang berlatih sekali untuk 10.000 tendangan, tapi saya takut pada orang yang berlatih satu tendangan sebanyak 10.000 kali. <i class="mdi mdi-format-quote-close"></i>
                 </p>
                 <h5 class="text-white">
-                    - Fadlisaad (Ubold Admin User)
+                    - Bruce Lee
                 </h5>
             </div> <!-- end auth-user-testimonial-->
         </div>
