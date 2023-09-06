@@ -7,9 +7,9 @@
             <div class="col-md-12 d-flex justify-content-center">
                 <ul class="list-unstyled d-flex portfolio-filters">
                     <li data-filter="*" class="py-2 px-4 filter-active text-white">ALL</li>
-                    <li data-filter=".filter-web" class="py-2 px-4">Web</li>
-                    <li data-filter=".filter-design" class="py-2 px-4">Design</li>
-                    <li data-filter=".filter-photo" class="py-2 px-4">Photography</li>
+                    <li data-filter=".filter-web" class="py-2 px-4">Event</li>
+                    <li data-filter=".filter-design" class="py-2 px-4">Latihan</li>
+                    <li data-filter=".filter-photo" class="py-2 px-4">UKT</li>
                 </ul>
             </div>
         </div>
