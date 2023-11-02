@@ -20,7 +20,7 @@ jobs:
       with:
         host: 103.82.92.134
         username: admin
-        key: K5j67k2i
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
           cd /home/admin/larabase/public
