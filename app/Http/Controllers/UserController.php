@@ -45,10 +45,9 @@ class UserController extends CoreController
         $kategori = $categoryServise->all();
         $unlat = $unlatService->all();
         $user = $userService->all();
-        // $status = ['Aktif', 'Tidak Aktif'];
         $status = [
-            'Aktif' => 1,
-            'Tidak Aktif' => 0,
+            1 => 'YA',
+            0 => 'TIDAK',
         ];
         return view('admin.contents.user.index', [
             'menu' => $this->menu,

@@ -291,7 +291,7 @@
                 $('#kategori').val(response.kategori.id).trigger('change')
                 $('#agama').val(response.agama.id).trigger('change')
                 // $('#status').val(response.status).trigger('change')
-                $('#status').val(response.status)
+                $('#status').val(response.status).trigger('change.select2');
                 // activeLogic(response.status, 'status')
             });
 

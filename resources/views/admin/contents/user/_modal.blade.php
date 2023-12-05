@@ -156,11 +156,11 @@
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="status">Status</label>
+                                <label for="status">Status Aktif</label>
                                 <div class="controls">
                                     <select class="select2 form-control form-control-lg" id="status" name="status" style="padding:10px !important;">
                                         @foreach($status as $label => $value)
-                                        <option value="{{ $value }}">{{ $label }}</option>
+                                        <option value="{{ $label }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
 
