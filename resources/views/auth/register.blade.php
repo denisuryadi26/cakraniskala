@@ -63,401 +63,249 @@ $sabuk = Sabuk::all();
 $unlat = Unlat::all();
 @endphp
 
-<body class="auth-fluid-pages pb-0">
+<body class="authentication-bg authentication-bg-pattern">
 
-    <div class="auth-fluid">
-        <!--Auth fluid left content -->
-        <div class="auth-fluid-form-box">
-            <div class="align-items-center d-flex h-100">
-                <div class="p-3">
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-12">
+                    <div class="card bg-pattern">
 
-                    <!-- Logo -->
-                    <div class="auth-brand text-center text-lg-start">
-                        <div class="auth-brand">
-                            <a href="{{ route('register') }}" class="logo logo-dark text-center">
-                                <span class="logo-lg">
-                                    <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="" height="22">
-                                </span>
-                            </a>
+                        <div class="card-body p-4">
 
-                            <a href="{{ route('register') }}" class="logo logo-light text-center">
-                                <span class="logo-lg">
-                                    <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="" height="22">
-                                </span>
-                            </a>
-                        </div>
+                            <div class="text-center w-75 m-auto">
+                                <div class="auth-brand text-center text-lg-start">
+                                    <div class="auth-brand">
+                                        <a href="{{ route('register') }}" class="logo logo-dark text-center">
+                                            <span class="logo-lg">
+                                                <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="" height="22">
+                                            </span>
+                                        </a>
+
+                                        <a href="{{ route('register') }}" class="logo logo-light text-center">
+                                            <span class="logo-lg">
+                                                <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="" height="22">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-muted mb-4 mt-3">Silahkan isi data diri dengan benar.</p>
+                            </div>
+
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="user-name">Nama Lengkap</label>
+                                            <div class="controls">
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" required data-validation-required-message="Harap Masukkan Nama Lengkap">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="nik">NIK</label>
+                                            <div class="controls">
+                                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="tempat_lahir">Tempat Lahir</label>
+                                            <div class="controls">
+                                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required data-validation-required-message="Harap Masukkan Tempat Lahir">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="tgl_lahir">Tanggal Lahir</label>
+                                            <div class="controls">
+                                                <input type="date" class="form-control" name="tgl_lahir" required>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+
+                                <fieldset class="form-group floating-label-form-group">
+                                    <label for="alamat">Alamat Lengkap</label>
+                                    <div class="controls">
+                                        <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat Lengkap" required data-validation-required-message="Harap Masukan Alamat Lengkap"></textarea>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group floating-label-form-group">
+                                    <label for="no_hp">No. Hp</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor HP" required data-validation-required-message="Harap Masukan Nomor HP">
+                                    </div>
+                                </fieldset>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="group">Jabatan</label>
+                                            <div class="controls">
+                                                <select class="select2 form-control form-control-lg" id="group" name="group_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                                    <option value="">Pilih Jabatan</option>
+                                                    @foreach($group as $item)
+                                                    @if($item->name === 'Anggota' || $item->name === 'Pengurus/Pelatih' || $item->name === 'Anggota Kehormatan')
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="agama">Agama</label>
+                                            <div class="controls">
+                                                <select class="select2 form-control form-control-lg" id="agama_id" name="agama_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                                    <option value="">Pilih Agama</option>
+                                                    @foreach($agama as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="kategori">Kategori</label>
+                                            <div class="controls">
+                                                <select class="select2 form-control form-control-lg" id="kategori" name="kategori_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                                    <option value="">Pilih Kategori</option>
+                                                    @foreach($kategori as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="sabuk">Sabuk</label>
+                                            <div class="controls">
+                                                <select class="select2 form-control form-control-lg" id="sabuk" name="sabuk_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                                    <option value="">Pilih Sabuk</option>
+                                                    @foreach($sabuk as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+
+                                <fieldset class="form-group floating-label-form-group">
+                                    <label for="unlat">Unlat</label>
+                                    <div class="controls">
+
+                                        <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                            <option value="">Pilih Unlat</option>
+                                            @foreach($unlat as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+
+                                        </select>
+
+                                    </div>
+                                </fieldset>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="email">Email</label>
+                                            <div class="controls">
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" required data-validation-required-message="Harap Masukkan Email">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="user-name">User Name</label>
+                                            <div class="controls">
+                                                <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required data-validation-required-message="Harap Masukkan Username">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group mb-1">
+                                            <label for="user-password">Enter Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="password" id="password" class="form-control" required data-validation-required-message="Harap Masukkan Password" placeholder="Enter Password">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset class="form-group floating-label-form-group mb-1">
+                                            <label for="user-password">Confirm Password</label>
+                                            <div class="controls">
+                                                <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re-type Password" required>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <fieldset class="form-group floating-label-form-group mb-1">
+                                        <label for="user-name">Foto Memakai Seragam (Hanya Foto)</label>
+                                        <input type="file" class="files" id="avatar" name="avatar" accept=".jpg,.png,.svg" required>
+                                    </fieldset>
+
+                                    <fieldset class="form-group floating-label-form-group">
+                                        <label for="user-name">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
+                                        <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
+                                    </fieldset>
+                                </div>
+
+                                </br>
+                                <div class="row mb-0">
+                                    <div class="col-md-6 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Register') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!-- end card-body -->
                     </div>
+                    <!-- end card -->
 
-                    <!-- title-->
-                    <h4 class="mt-0">Daftar</h4>
-                    <p class="text-muted mb-4">Silahkan isi data diri dengan benar.</p>
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-white-50">Sudah Punya Akun? <a href="{{ route('login') }}" class="text-white ms-1"><b>Log In</b></a></p>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
 
-                    <!-- form -->
-                    <!-- <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Nama Lengkap</label>
-                            <input class="form-control" type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" required data-validation-required-message="Harap Masukkan Nama Lengkap">
-                        </div>
-                        <div class="mb-3">
-                            <label for="nik" class="form-label">NIK</label>
-                            <input class="form-control" type="number" id="nik" name="nik" placeholder="Masukkan NIK" required data-validation-required-message="Harap Masukkan NIK">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                            <input class="form-control" type="text" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required data-validation-required-message="Harap Masukkan Tempat Lahir">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                            <input class="form-control" type="date" id="tgl_lahir" name="tgl_lahir" placeholder="Masukkan Tanggal Lahir" required data-validation-required-message="Harap Masukkan Tanggal Lahir">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <div class="controls">
-                                <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat Lengkap" placeholder="Masukkan Alamat Lengkap" required data-validation-required-message="Harap Masukan Alamat Lengkap"></textarea>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="no_hp" class="form-label">No. Hp</label>
-                            <input class="form-control" type="number" id="no_hp" name="no_hp" placeholder="Nomor HP" required data-validation-required-message="Harap Masukan Nomor HP">
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="group" class="form-label">Jabatan</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control" id="group" name="group_id" style="padding:10px !important;">
-                                            <option value="">Pilih Jabatan</option>
-                                            @foreach($group as $item)
-                                            @if($item->name === 'Anggota' || $item->name === 'Pengurus/Pelatih' || $item->name === 'Anggota Kehormatan')
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="agama" class="form-label">Agama</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control" id="agama_id" name="agama_id" style="padding:10px !important;">
-                                            <option value="">Pilih Agama</option>
-                                            @foreach($agama as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="kategori" class="form-label">Kategori</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control" id="kategori" name="kategori_id" style="padding:10px !important;">
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach($kategori as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="sabuk" class="form-label">Sabuk</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control" id="sabuk" name="sabuk_id" style="padding:10px !important;">
-                                            <option value="">Pilih Sabuk</option>
-                                            @foreach($sabuk as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="unlat" class="form-label">Unlat</label>
-                            <div class="controls">
-
-                                <select class="select2 form-control form-control" id="unlat" name="unlat_id" style="padding:10px !important;">
-                                    <option value="">Pilih Unlat</option>
-                                    @foreach($unlat as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input class="form-control" type="email" id="email" name="email" placeholder="Email" required data-validation-required-message="Harap Masukkan Email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input class="form-control" type="text" id="username" name="username" placeholder="User Name" required data-validation-required-message="Harap Masukkan Username">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group mb-1">
-                                    <label for="user-password" class="form-label">Enter Password</label>
-                                    <div class="controls">
-                                        <input type="password" name="password" id="password" class="form-control" required data-validation-required-message="Harap Masukkan Password" placeholder="Enter Password">
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group mb-1">
-                                    <label for="user-password" class="form-label">Confirm Password</label>
-                                    <div class="controls">
-                                        <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re-type Password" required>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <fieldset class="form-group floating-label-form-group mb-1">
-                            <label for="user-name" class="form-label">Foto Memakai Seragam (Hanya Foto)</label>
-                            <input type="file" class="files" id="avatar" name="avatar" accept=".jpg,.png,.svg" required>
-                        </fieldset>
-
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="user-name" class="form-label">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
-                            <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
-                        </fieldset>
-
-                        <div class="text-center d-grid">
-                            <button class="btn btn-primary waves-effect waves-light" type="submit"> Sign Up </button>
-                        </div>
-                    </form> -->
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="user-name">Nama Lengkap</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" required data-validation-required-message="Harap Masukkan Nama Lengkap">
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="nik">NIK</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK">
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="tempat_lahir">Tempat Lahir</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required data-validation-required-message="Harap Masukkan Tempat Lahir">
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <div class="controls">
-                                        <input type="date" class="form-control" name="tgl_lahir" required>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="alamat">Alamat Lengkap</label>
-                            <div class="controls">
-                                <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat Lengkap" required data-validation-required-message="Harap Masukan Alamat Lengkap"></textarea>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="no_hp">No. Hp</label>
-                            <div class="controls">
-                                <input type="number" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor HP" required data-validation-required-message="Harap Masukan Nomor HP">
-                            </div>
-                        </fieldset>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="group">Jabatan</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control-lg" id="group" name="group_id" style="padding:10px !important;">
-                                            <option value="">Pilih Jabatan</option>
-                                            @foreach($group as $item)
-                                            @if($item->name === 'Anggota' || $item->name === 'Pengurus/Pelatih' || $item->name === 'Anggota Kehormatan')
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="agama">Agama</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control-lg" id="agama_id" name="agama_id" style="padding:10px !important;">
-                                            <option value="">Pilih Agama</option>
-                                            @foreach($agama as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="kategori">Kategori</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control-lg" id="kategori" name="kategori_id" style="padding:10px !important;">
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach($kategori as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="sabuk">Sabuk</label>
-                                    <div class="controls">
-                                        <select class="select2 form-control form-control-lg" id="sabuk" name="sabuk_id" style="padding:10px !important;">
-                                            <option value="">Pilih Sabuk</option>
-                                            @foreach($sabuk as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="unlat">Unlat</label>
-                            <div class="controls">
-
-                                <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;">
-                                    <option value="">Pilih Unlat</option>
-                                    @foreach($unlat as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-                        </fieldset>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="email">Email</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required data-validation-required-message="Harap Masukkan Email">
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="user-name">User Name</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required data-validation-required-message="Harap Masukkan Username">
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group mb-1">
-                                    <label for="user-password">Enter Password</label>
-                                    <div class="controls">
-                                        <input type="password" name="password" id="password" class="form-control" required data-validation-required-message="Harap Masukkan Password" placeholder="Enter Password">
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset class="form-group floating-label-form-group mb-1">
-                                    <label for="user-password">Confirm Password</label>
-                                    <div class="controls">
-                                        <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re-type Password" required>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <fieldset class="form-group floating-label-form-group mb-1">
-                                <label for="user-name">Foto Memakai Seragam (Hanya Foto)</label>
-                                <input type="file" class="files" id="avatar" name="avatar" accept=".jpg,.png,.svg" required>
-                            </fieldset>
-
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="user-name">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
-                                <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
-                            </fieldset>
-                        </div>
-
-                        </br>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- end form-->
-
-                    <!-- Footer-->
-                    <footer class="footer footer-alt">
-                        <p class="text-muted">Sudah punya akun? <a href="{{ route('login') }}" class="text-muted ms-1"><b>Log In</b></a></p>
-                    </footer>
-
-                </div> <!-- end .card-body -->
-            </div> <!-- end .align-items-center.d-flex.h-100-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
         </div>
-        <!-- end auth-fluid-form-box-->
-
-        <!-- Auth fluid right content -->
-        <div class="auth-fluid-right text-center">
-            <div class="auth-user-testimonial">
-                <h2 class="mb-3 text-white">I love Silat!</h2>
-                <p class="lead"><i class="mdi mdi-format-quote-open"></i> Saya tidak takut pada orang yang berlatih sekali untuk 10.000 tendangan, tapi saya takut pada orang yang berlatih satu tendangan sebanyak 10.000 kali. <i class="mdi mdi-format-quote-close"></i>
-                </p>
-                <h5 class="text-white">
-                    - Bruce Lee
-                </h5>
-            </div> <!-- end auth-user-testimonial-->
-        </div>
-        <!-- end Auth fluid right content -->
+        <!-- end container -->
     </div>
-    <!-- end auth-fluid-->
+    <!-- end page -->
+
+
     <script>
         function resetFileInput() {
             $('#fileUpload').fileinput('destroy');
