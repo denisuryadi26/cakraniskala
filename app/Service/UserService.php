@@ -151,7 +151,7 @@ class UserService extends CoreService
         // echo "<pre>";
         // print_r($data);die();
         DB::table('tbl_sequencecode')
-            ->where('type', 'OD')
+            ->where('type', 'CN')
             ->update($data);
 
         return $data;
