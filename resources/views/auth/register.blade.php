@@ -108,7 +108,7 @@ $unlat = Unlat::all();
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="nik">NIK</label>
                                             <div class="controls">
-                                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
+                                                <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
                                             </div>
                                         </fieldset>
                                     </div>
@@ -305,7 +305,6 @@ $unlat = Unlat::all();
         <!-- end container -->
     </div>
     <!-- end page -->
-
 
     <script>
         function resetFileInput() {
