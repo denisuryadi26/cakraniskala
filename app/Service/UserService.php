@@ -61,9 +61,21 @@ class UserService extends CoreService
         return $this->userRepository->all();
     }
 
+    public function countAll()
+    {
+        return User::whereDoesntHave('group', function ($query) {
+            $query->where('code', 'SPRADM');
+        })
+            ->count();
+    }
+
     public function countActif()
     {
-        return User::where('status', '1')->count();
+        return User::where('status', '1')
+            ->whereDoesntHave('group', function ($query) {
+                $query->where('code', 'SPRADM');
+            })
+            ->count();
     }
 
     public function countInactif()

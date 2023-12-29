@@ -40,6 +40,7 @@ class DashboardController extends CoreController
         return view('admin.contents.index', [
             'menu' => ($this->menu ? $this->menu : ''),
             'unlat' => $this->unlatService->count(),
+            'all_user' => $this->userService->countAll(),
             'user_aktif' => $this->userService->countActif(),
             'user_inaktif' => $this->userService->countInactif(),
             'setting' => ($this->settingVal ? $this->settingVal : '')

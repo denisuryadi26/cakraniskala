@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Generator\SequenceCodeController;
 
 use App\Http\Controllers\Generator\PerguruanController;
@@ -58,23 +59,20 @@ Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/pengurus', [HomeController::class, 'pengurus'])->name('pengurus');
 // Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
-Route::get('/api-doc', [ApiDocController::class, 'index'])->name('api_doc');
 
 Auth::routes();
 
 Route::group(['prefix' => 'administrator', 'middleware' => ['auth', 'roles']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/cek-asterisk', [AgiController::class, 'asteriskCheckConnection'])->name('cek_asterisk_connection');
-    Route::get('/test-call-sip', [AgiController::class, 'callToSip'])->name('cek_asterisk_connection');
     Route::get('/delete_file', [DashboardController::class, 'deleteFileContent'])->name('file_delete');
 
 
-    Route::group(['prefix'=>'sequencecodes'], function () {
+    Route::group(['prefix' => 'sequencecodes'], function () {
         Route::get('/', [SequenceCodeController::class, 'index'])->name('dashboard_sequencecodes');
         Route::get('/get', [SequenceCodeController::class, 'get'])->name('dashboard_sequencecodes_detail');
         Route::get('/delete', [SequenceCodeController::class, 'destroy'])->name('dashboard_sequencecodes_delete');
         Route::post('/', [SequenceCodeController::class, 'store'])->name('dashboard_sequencecodes_post');
-        Route::get('/datatable.json', [SequenceCodeController::class ,'__datatable'])->name('dashboard_sequencecodes_table');
+        Route::get('/datatable.json', [SequenceCodeController::class, '__datatable'])->name('dashboard_sequencecodes_table');
     });
 
     Route::group(['prefix' => 'perguruans'], function () {
