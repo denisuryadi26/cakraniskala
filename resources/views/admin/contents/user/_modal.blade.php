@@ -27,6 +27,13 @@
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group">
+                                <label for="code">Code Anggota</label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="Code Anggota" required data-validation-required-message="This field is required">
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group floating-label-form-group">
                                 <label for="tempat_lahir">Tempat Lahir</label>
                                 <div class="controls">
                                     <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required data-validation-required-message="This field is required">

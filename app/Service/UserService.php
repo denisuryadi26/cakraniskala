@@ -10,7 +10,9 @@ namespace App\Service;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\Agama;
+use App\Models\Generator\SequenceCode;
 use App\Repository\UserRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -80,6 +82,37 @@ class UserService extends CoreService
     }
 
 
+
+    public function getSequence()
+    {
+        $model = SequenceCode::withoutTrashed()->select('sequence', 'sequence_digit')->where('type', 'CN')->get();
+        // dd($model[0]['sequence']);
+        $sequence = $model[0]['sequence'];
+        $sequence_digit = $model[0]['sequence_digit'];
+        $model['sequence'] = $sequence;
+        $sequence = strval($sequence);
+        $sequence_digit = intval($sequence_digit);
+        return str_pad($sequence, $sequence_digit, '0', STR_PAD_LEFT);
+    }
+
+    public function updateSequence($updateSequence)
+    {
+        // dd($updateSequence);
+
+        // $order_code = $order_code + 1;
+        // dd($value);
+        $data =
+            array(
+                'sequence' => $updateSequence
+            );
+        // echo "<pre>";
+        // print_r($data);die();
+        DB::table('tbl_sequencecode')
+            ->where('type', 'OD')
+            ->update($data);
+
+        return $data;
+    }
 
     public function insertFiles(
         $uploadHandler,

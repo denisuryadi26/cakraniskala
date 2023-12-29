@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Generator\SequenceCodeController;
 
 use App\Http\Controllers\Generator\PerguruanController;
 use App\Http\Controllers\Generator\ServiceController;
@@ -67,6 +68,14 @@ Route::group(['prefix' => 'administrator', 'middleware' => ['auth', 'roles']], f
     Route::get('/test-call-sip', [AgiController::class, 'callToSip'])->name('cek_asterisk_connection');
     Route::get('/delete_file', [DashboardController::class, 'deleteFileContent'])->name('file_delete');
 
+
+    Route::group(['prefix'=>'sequencecodes'], function () {
+        Route::get('/', [SequenceCodeController::class, 'index'])->name('dashboard_sequencecodes');
+        Route::get('/get', [SequenceCodeController::class, 'get'])->name('dashboard_sequencecodes_detail');
+        Route::get('/delete', [SequenceCodeController::class, 'destroy'])->name('dashboard_sequencecodes_delete');
+        Route::post('/', [SequenceCodeController::class, 'store'])->name('dashboard_sequencecodes_post');
+        Route::get('/datatable.json', [SequenceCodeController::class ,'__datatable'])->name('dashboard_sequencecodes_table');
+    });
 
     Route::group(['prefix' => 'perguruans'], function () {
         Route::get('/', [PerguruanController::class, 'index'])->name('dashboard_perguruans');

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Service\UserService;
 
 class RegisterController extends Controller
 {
@@ -36,9 +37,11 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $userService;
+    public function __construct(UserService $userService)
     {
         $this->middleware('guest');
+        $this->userService = $userService;
     }
 
     /**
@@ -65,6 +68,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $getSequence = $this->userService->getSequence();
+        // dd($getSequence);
+        $sum = 1;
+        $updateSequence = $sum += $getSequence;
+        // update sequence
+        $updatesequence = $this->userService->updateSequence($updateSequence);
+        // $updatesequence = $this->requestdetailService->updateSequence($updateSequence);
+        $newSequence = $this->userService->getSequence();
         // dd($data);
         if (request()->hasfile('avatar')) {
             // $avatarName = time() . '.' . request()->avatar->getClientOriginalExtension();
@@ -90,6 +101,7 @@ class RegisterController extends Controller
         return User::create([
             'fullname' => $data['name'],
             'nik' => $data['nik'],
+            'code' => $newSequence,
             'profile_picture' => 'profile_picture/' . $avatarName ?? NULL,
             // 'dokument' => 'dokument/' . $dokumentName ?? NULL,
             // 'dokument' => ($dokumentName ? 'dokument/' . $dokumentName : NULL),

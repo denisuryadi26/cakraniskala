@@ -43,6 +43,7 @@ class User extends Authenticatable implements Auditable, JWTSubject
         'id',
         'group_id',
         'nik',
+        'code',
         'fullname',
         'username',
         'alamat',
