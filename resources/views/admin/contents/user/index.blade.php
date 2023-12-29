@@ -231,6 +231,7 @@
 
         $(document).on('click', '.view', function(e) {
             let id = $(this).data('id');
+            let code = $(this).data('code');
             e.preventDefault();
             formReset(true);
             formDisable();

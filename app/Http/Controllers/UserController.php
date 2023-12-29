@@ -13,6 +13,7 @@ use App\Service\Generator\AgamaService;
 use App\Service\Generator\SabukService;
 use App\Service\Generator\UnlatService;
 use App\Service\Generator\CategoryService;
+use App\Service\Generator\SequenceCodeService;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use App\Service\UploadHandler;
@@ -37,7 +38,7 @@ class UserController extends CoreController
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index(UserService $userService, GroupService $groupService, AgamaService $agamaService, UnlatService $unlatService, SabukService $sabukServise, CategoryService $categoryServise)
+    public function index(UserService $userService, GroupService $groupService, AgamaService $agamaService, UnlatService $unlatService, SabukService $sabukServise, CategoryService $categoryServise, SequenceCodeService $sequenceCodeService)
     {
         $group = $groupService->all();
         $agama = $agamaService->all();
@@ -45,6 +46,17 @@ class UserController extends CoreController
         $kategori = $categoryServise->all();
         $unlat = $unlatService->all();
         $user = $userService->all();
+        $digit = $sequenceCodeService->digitCn();
+        $getSequence = $this->userService->getSequence();
+        $sum = 1;
+        // $updateSequence = $sum += $getSequence;
+        $updateSequence = $getSequence + $sum;
+        $updateSequenceFormatted = str_pad($updateSequence, $digit['sequence_digit'], '0', STR_PAD_LEFT);
+        // update sequence
+        // $updatesequence = $this->userService->updateSequence($updateSequence);
+        // $updatesequence = $this->requestdetailService->updateSequence($updateSequence);
+        $newSequence = $updateSequenceFormatted;
+        // dd($updateSequenceFormatted);
         $status = [
             1 => 'YA',
             0 => 'TIDAK',
@@ -54,6 +66,7 @@ class UserController extends CoreController
             'group' => $group,
             'agama' => $agama,
             'sabuk' => $sabuk,
+            'code' => $newSequence,
             'kategori' => $kategori,
             'unlat' => $unlat,
             'status' => $status,

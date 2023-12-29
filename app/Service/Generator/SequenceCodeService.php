@@ -1,7 +1,8 @@
 <?php
+
 /**
-* @author Dodi Priyanto<dodi.priyanto76@gmail.com>
-*/
+ * @author Dodi Priyanto<dodi.priyanto76@gmail.com>
+ */
 
 namespace App\Service\Generator;
 
@@ -23,16 +24,16 @@ class SequenceCodeService extends CoreService
     public function formValidate($request)
     {
         $rules = [
-//            'email' => 'required|min:1|unique:conf_users,email,NULL,id,deleted_at,NULL'
+            //            'email' => 'required|min:1|unique:conf_users,email,NULL,id,deleted_at,NULL'
         ];
         $messages = [
             'email.unique' => 'Email sudah terdaftar.',
         ];
         $validator = Validator::make($request, $rules, $messages);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return [
-                'status'=> 'error',
+                'status' => 'error',
                 'message' => $messages
             ];
         }
@@ -44,12 +45,19 @@ class SequenceCodeService extends CoreService
         return $this->sequencecodeRepository->all();
     }
 
+    public function digitCn()
+    {
+        $model = SequenceCode::withoutTrashed()->select('sequence', 'sequence_digit')->where('type', 'CN')->first();
+        return $model;
+    }
+
     public function find($id, $relation = null)
     {
         return $this->sequencecodeRepository->find($id, $relation);
     }
 
-    public function loadDataTable($access){
+    public function loadDataTable($access)
+    {
         $model = SequenceCode::withoutTrashed()->get();
         return $this->privilageBtnDatatable($model, $access);
     }

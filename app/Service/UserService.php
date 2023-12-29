@@ -12,9 +12,11 @@ use App\Models\User;
 use App\Models\Agama;
 use App\Models\Generator\SequenceCode;
 use App\Repository\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserService extends CoreService
 {
@@ -78,7 +80,48 @@ class UserService extends CoreService
     {
         $model = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori'])->get();
         // dd($model);
-        return $this->privilageBtnDatatable($model, $access);
+        // return $this->privilageBtnDatatable($model, $access);
+        $data = DataTables::of($model)->addIndexColumn()
+
+            ->addColumn('action', function ($model) use ($access) {
+                $delete_btn = '';
+                $update_btn = '';
+                $view_btn = '';
+                $code = $model->code;
+                $parent_id = null;
+
+                if ($model->parent) {
+                    $parent_id = $model->parent->id;
+                }
+                $adminName = Auth::user()->fullname;
+
+                if ($access->is_viewable == true) {
+                    $view_btn = "<button class='btn btn-icon btn-info btn-glow mr-1 mb-1 view'
+                                 data-toggle='tooltip' data-placement='top' title='View Data' id='view' data-parent_id='$parent_id' data-code='$model->code' data-id='$model->id' style='margin:3px'>
+                                    <i class='tf-icons ti ti-eye'></i>
+                            </button>";
+                }
+
+                if ($access->is_deletable == true) {
+                    $model->name = ($model->name ? $model->name : ($model->username ? $model->username : $model->parameter));
+                    $delete_btn = "<button class='btn btn-icon btn-danger btn-glow mr-1 mb-1 delete'
+                                 data-toggle='tooltip' data-placement='top' title='Delete Data' data-parent_id='$parent_id' id='delete' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
+                                    <i class='tf-icons ti ti-trash'></i>
+                               </button>";
+                }
+                if ($access->is_editable == true) {
+                    $update_btn = "<button class='btn btn-icon btn-warning btn-glow mr-1 mb-1 update'
+                                 data-toggle='tooltip' data-placement='top' title='Edit Data' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
+                                    <i class='tf-icons ti ti-pencil'></i>
+                               </button>";
+                }
+
+
+                $action = $view_btn . $update_btn . $delete_btn;
+                return $action;
+            })
+            ->make(true);
+        return $data;
     }
 
 
