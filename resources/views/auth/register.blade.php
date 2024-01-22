@@ -212,27 +212,28 @@ $unlat = Unlat::all();
                                 </div>
 
 
-                                <fieldset class="form-group floating-label-form-group">
-                                    <label for="unlat">Unlat</label>
-                                    <div class="controls">
 
-                                        <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                            <option value="">Pilih Unlat</option>
-                                            @foreach($unlat as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-
-                                        </select>
-
-                                    </div>
-                                </fieldset>
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <fieldset class="form-group floating-label-form-group">
+                                        <!-- <fieldset class="form-group floating-label-form-group">
                                             <label for="email">Email</label>
                                             <div class="controls">
                                                 <input type="text" class="form-control" id="email" name="email" placeholder="Email" required data-validation-required-message="Harap Masukkan Email">
+                                            </div>
+                                        </fieldset> -->
+                                        <fieldset class="form-group floating-label-form-group">
+                                            <label for="unlat">Unlat</label>
+                                            <div class="controls">
+
+                                                <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
+                                                    <option value="">Pilih Unlat</option>
+                                                    @foreach($unlat as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+
+                                                </select>
+
                                             </div>
                                         </fieldset>
                                     </div>

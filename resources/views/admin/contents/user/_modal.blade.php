@@ -30,7 +30,6 @@
                                 <label for="code">Code Anggota</label>
                                 <div class="controls">
                                     <input type="text" class="form-control" id="code" name="code" placeholder="Code Anggota" required data-validation-required-message="This field is required">
-                                    <div>{{ $code }}</div>
                                 </div>
                             </fieldset>
 
@@ -77,12 +76,12 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset class="form-group floating-label-form-group">
+                            <!-- <fieldset class="form-group floating-label-form-group">
                                 <label for="user-name">Your Email</label>
                                 <div class="controls">
                                     <input type="email" name="email" id="email" class="form-control" required data-validation-required-message="This field is required" placeholder="Your Email">
                                 </div>
-                            </fieldset>
+                            </fieldset> -->
 
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="group">Group</label>

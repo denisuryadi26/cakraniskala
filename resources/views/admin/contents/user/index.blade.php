@@ -34,8 +34,8 @@
                             <th>Nama Lengkap</th>
                             <th>Profile</th>
                             <th>Dokument</th>
-                            <!-- <th>Username</th> -->
-                            <th>Email</th>
+                            <th>Username</th>
+                            <!-- <th>Email</th> -->
                             <th>Group</th>
                             <th>Status</th>
                             <th class="text-center">Action</th>
@@ -173,14 +173,14 @@
                         return img;
                     }
                 },
-                // {
-                //     data: 'username',
-                //     name: 'username'
-                // },
                 {
-                    data: 'email',
-                    name: 'email'
+                    data: 'username',
+                    name: 'username'
                 },
+                // {
+                //     data: 'email',
+                //     name: 'email'
+                // },
                 {
                     data: 'group.name',
                     name: 'group',
@@ -246,7 +246,7 @@
                 $('#username').val(response.username)
                 $('#nik').val(response.nik)
                 $('#code').val(response.code)
-                $('#email').val(response.email)
+                // $('#email').val(response.email)
                 $('#no_hp').val(response.no_hp)
                 $('#alamat').val(response.alamat)
                 $('#tempat_lahir').val(response.tempat_lahir)
@@ -281,7 +281,7 @@
                 $('#username').val(response.username)
                 $('#nik').val(response.nik)
                 $('#code').val(response.code)
-                $('#email').val(response.email)
+                // $('#email').val(response.email)
                 $('#no_hp').val(response.no_hp)
                 $('#alamat').val(response.alamat)
                 $('#tempat_lahir').val(response.tempat_lahir)
