@@ -85,10 +85,6 @@
 
 @section('script')
 
-
-<!-- BEGIN: Page JS-->
-
-
 <script type="text/javascript">
     var url = {
         detail: "{{route('dashboard_user_detail')}}",
