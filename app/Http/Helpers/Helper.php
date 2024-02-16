@@ -4,6 +4,7 @@
  * @author Dodi Priyanto<dodi.priyanto76@gmail.com>
  */
 
+use App\Models\Generator\SequenceCode;
 use App\Models\Menu;
 
 function get_breadcrumbs($url)
@@ -236,4 +237,39 @@ function generateUnicode($lastCode)
         $strDigit .= '0';
     }
     return $strDigit . $newCode;
+}
+
+function generateCode(SequenceCode $param)
+{
+    $type = $param->type;
+    $prefix = $param->prefix;
+    $numberSeq = $param->sequence;
+    $sum = 1;
+    $newCode = $sum += $numberSeq;
+    $digitLengt = $param->sequence_digit;
+    $strDigit = '';
+    for ($i = 0; $i <= $digitLengt; $i++) {
+        $strDigit .= '0';
+    }
+
+    $sequence = strval($numberSeq);
+    $sequence_digit = intval($digitLengt);
+
+
+    if ($type == 'CODE') {
+        $code = $type . '-' . digitLogic($strDigit, $newCode);
+    } elseif ($type == 'CN') {
+        // $code = digitLogic($strDigit, $newCode);
+        $code = str_pad($sequence, $sequence_digit, '0', STR_PAD_LEFT);
+    } else {
+        return '-';
+    }
+
+    return $code;
+}
+
+function digitLogic($strDigit, $numberSeq)
+{
+    $result = substr($strDigit, 0, -strlen($numberSeq)) . $numberSeq;
+    return $result;
 }

@@ -35,6 +35,7 @@
                             <th>Profile</th>
                             <th>Dokument</th>
                             <th>Username</th>
+                            <th>Kode Anggota</th>
                             <!-- <th>Email</th> -->
                             <th>Group</th>
                             <th>Status</th>
@@ -89,7 +90,8 @@
         detail: "{{route('dashboard_user_detail')}}",
         delete: "{{route('dashboard_user_delete')}}",
         submit: "{{route('dashboard_user_post')}}",
-        table: "{{route('dashboard_user_table')}}"
+        table: "{{route('dashboard_user_table')}}",
+        generate_user_code: "{{route('dashboard_request_user_register_generate_code')}}"
     };
     var table;
 
@@ -172,10 +174,10 @@
                     data: 'username',
                     name: 'username'
                 },
-                // {
-                //     data: 'email',
-                //     name: 'email'
-                // },
+                {
+                    data: 'code',
+                    name: 'code'
+                },
                 {
                     data: 'group.name',
                     name: 'group',
@@ -218,6 +220,7 @@
             resetFileInput();
             makeInput();
             makeInput2();
+            generateUserCode();
             formReset(true);
             $(".modal").removeAttr("tabindex");
 
@@ -437,7 +440,7 @@
                         // swalStatus(response, "myModal")
                         Swal.fire({
                             title: "Update Success",
-                            text: "Data is successfully Updated.",
+                            text: response.message,
                             type: "success"
                         }).then(function() {
                             window.location.reload();
@@ -580,6 +583,31 @@
                     elErrorContainer: '#kartik-file-errors',
                 });
             }
+        }
+
+        function generateUserCode(user_id) {
+            let param = {
+                'user_id': user_id
+            }
+
+            // console.log(param)
+            $.get(url.generate_user_code, {
+                user_id: user_id
+            }, function(response) {
+                let result = response.data;
+
+                if (result !== null) {
+                    $('#code').val(result);
+                } else {
+
+                    validateSwal("Code Belum Di Buat")
+                    $('#code').val("");
+
+                }
+
+
+
+            })
         }
 
     });

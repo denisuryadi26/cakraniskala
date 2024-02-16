@@ -22,14 +22,14 @@
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="nik">NIK</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="This field is required">
+                                    <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
                                 </div>
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="code">Code Anggota</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" id="code" name="code" placeholder="Code Anggota" required data-validation-required-message="This field is required">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="Code Anggota" readonly required data-validation-required-message="This field is required">
                                 </div>
                             </fieldset>
 
@@ -51,7 +51,7 @@
                                 <label for="tgl_lahir">Tanggal Lahir</label>
                                 <div class="controls">
                                     <!-- <input type="date" class="form-control" name="tgl_lahir" required> -->
-                                    <input class="form-control" id="tgl_lahir" required>
+                                    <input class="form-control" id="tgl_lahir" name="tgl_lahir" required>
                                     <!-- <input type="text" id="pd-months-year" class="form-control pickadate-months-year" name="tgl_lahir" required /> -->
                                     <!-- <input type="text" id="tgl_lahir" name="tgl_lahir" class="form-control pickadate-months-year" placeholder="18 June, 2020" /> -->
                                 </div>
@@ -218,12 +218,12 @@
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group mb-1">
-                                <label for="user-name">Foto</label>
+                                <label for="user-name">Foto Memakai Seragam (Hanya Foto)</label>
                                 <input type="file" class="files" id="image" name="image" accept=".jpg,.png,.svg">
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="user-name">Dokument</label>
+                                <label for="user-name">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
                                 <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
                             </fieldset>
                         </div>

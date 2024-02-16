@@ -112,6 +112,15 @@ class UserController extends CoreController
         $input['dokument'] = $dokument;
         $input['password'] = bcrypt($request->get('password'));
         // dd($input);
+        // Check if $id is not present
+        if (empty($id)) {
+            // Execute the sequence update logic
+            $getSequence = $this->userService->getSequence();
+            $sum = 1;
+            $updateSequence = $sum + $getSequence;
+            // Update sequence
+            $updatesequence = $this->userService->updateSequence($updateSequence);
+        }
         $user = $this->userRepository->save($input);
         return response()->json([
             'status' => 'success',
@@ -146,5 +155,14 @@ class UserController extends CoreController
     public function __datatable()
     {
         return $this->load_data_table($this->userRepository);
+    }
+
+    public function generateUserCode(Request $request)
+    {
+        // dd($request);
+        // $user_id = $request->get('id');
+        $data = $this->userService->generateUserCode(['type' => 'CN']);
+
+        return response()->json(['data' => $data], 200);
     }
 }

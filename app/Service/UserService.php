@@ -61,6 +61,14 @@ class UserService extends CoreService
         return $this->userRepository->all();
     }
 
+    public function generateUserCode(array $param)
+    {
+        $row = SequenceCode::withoutTrashed()->where($param)->first();
+        if (empty($row)) return null;
+
+        return generateCode($row);
+    }
+
     public function countAll()
     {
         return User::whereDoesntHave('group', function ($query) {
