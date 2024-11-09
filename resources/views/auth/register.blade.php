@@ -156,7 +156,7 @@ $unlat = Unlat::all();
                                             <label for="group">Jabatan</label>
                                             <div class="controls">
                                                 <select class="select2 form-control form-control-lg" id="group" name="group_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                                    <option value="">Pilih Jabatan</option>
+                                                    <option value="" selected disabled>Pilih Jabatan</option>
                                                     @foreach($group as $item)
                                                     @if($item->name === 'Anggota' || $item->name === 'Pengurus/Pelatih' || $item->name === 'Anggota Kehormatan')
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
@@ -171,7 +171,7 @@ $unlat = Unlat::all();
                                             <label for="agama">Agama</label>
                                             <div class="controls">
                                                 <select class="select2 form-control form-control-lg" id="agama_id" name="agama_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                                    <option value="">Pilih Agama</option>
+                                                    <option value="" selected disabled>Pilih Agama</option>
                                                     @foreach($agama as $item)
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
@@ -182,13 +182,13 @@ $unlat = Unlat::all();
                                 </div>
 
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="kategori">Kategori</label>
                                             <div class="controls">
-                                                <select class="select2 form-control form-control-lg" id="kategori" name="kategori_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                                    <option value="">Pilih Kategori</option>
+                                                <select class="select2 form-control form-control-lg" id="kategori" name="kategori_id" style="padding:10px !important;">
+                                                    <option value="" selected disabled>Pilih Kategori</option>
                                                     @foreach($kategori as $item)
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
@@ -200,8 +200,8 @@ $unlat = Unlat::all();
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="sabuk">Sabuk</label>
                                             <div class="controls">
-                                                <select class="select2 form-control form-control-lg" id="sabuk" name="sabuk_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                                    <option value="">Pilih Sabuk</option>
+                                                <select class="select2 form-control form-control-lg" id="sabuk" name="sabuk_id" style="padding:10px !important;">
+                                                    <option value="" selected disabled>Pilih Sabuk</option>
                                                     @foreach($sabuk as $item)
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
@@ -209,7 +209,7 @@ $unlat = Unlat::all();
                                             </div>
                                         </fieldset>
                                     </div>
-                                </div>
+                                </div> -->
 
 
 
@@ -226,8 +226,8 @@ $unlat = Unlat::all();
                                             <label for="unlat">Unlat</label>
                                             <div class="controls">
 
-                                                <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
-                                                    <option value="">Pilih Unlat</option>
+                                                <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;" required>
+                                                    <option value="" selected disabled>Pilih Unlat</option>
                                                     @foreach($unlat as $item)
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
@@ -237,19 +237,21 @@ $unlat = Unlat::all();
                                             </div>
                                         </fieldset>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="user-name">User Name</label>
                                             <div class="controls">
                                                 <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required data-validation-required-message="Harap Masukkan Username">
                                             </div>
                                         </fieldset>
-                                    </div>
+                                    </div> -->
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <input type="hidden" name="password" id="password" value="123123">
+                                    <input type="hidden" name="confirm_password" value="123123">
+                                    <!-- <div class="col-md-6">
                                         <fieldset class="form-group floating-label-form-group mb-1">
                                             <label for="user-password">Enter Password</label>
                                             <div class="controls">
@@ -264,7 +266,7 @@ $unlat = Unlat::all();
                                                 <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re-type Password" required>
                                             </div>
                                         </fieldset>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">
@@ -273,10 +275,10 @@ $unlat = Unlat::all();
                                         <input type="file" class="files" id="avatar" name="avatar" accept=".jpg,.png,.svg" required>
                                     </fieldset>
 
-                                    <fieldset class="form-group floating-label-form-group">
+                                    <!-- <fieldset class="form-group floating-label-form-group">
                                         <label for="user-name">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
                                         <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
-                                    </fieldset>
+                                    </fieldset> -->
                                 </div>
 
                                 </br>

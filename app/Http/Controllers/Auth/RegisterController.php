@@ -76,7 +76,9 @@ class RegisterController extends Controller
         $updatesequence = $this->userService->updateSequence($updateSequence);
         // $updatesequence = $this->requestdetailService->updateSequence($updateSequence);
         $newSequence = $this->userService->getSequence();
-        // dd($data);
+        $name = $data['name'];
+        $username = strtolower(str_replace(' ', '', $name));
+        // dd($username);
         if (request()->hasfile('avatar')) {
             // $avatarName = time() . '.' . request()->avatar->getClientOriginalExtension();
             $extension = request()->avatar->getClientOriginalExtension();
@@ -112,11 +114,11 @@ class RegisterController extends Controller
             'no_hp' => $data['no_hp'],
             'group_id' => $data['group_id'],
             'agama_id' => $data['agama_id'],
-            'kategori_id' => $data['kategori_id'],
-            'sabuk_id' => $data['sabuk_id'],
+            'kategori_id' => isset($data['kategori_id']) ? $data['kategori_id'] : null,
+            'sabuk_id' => isset($data['sabuk_id']) ? $data['sabuk_id'] : null,
             'unlat_id' => $data['unlat_id'],
             // 'email' => $data['email'],
-            'username' => $data['username'],
+            'username' => $username,
             'password' => Hash::make($data['password']),
             'created_by' => 'SYSTEM',
             'updated_by' => 'SYSTEM',

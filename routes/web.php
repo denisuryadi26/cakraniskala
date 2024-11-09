@@ -18,7 +18,7 @@ use App\Http\Controllers\Generator\CategoryController;
 use App\Http\Controllers\ApiDocController;
 
 use App\Http\Controllers\AgiController;
-
+use App\Http\Controllers\CacheController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupConttroller;
@@ -58,6 +58,8 @@ Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/pengurus', [HomeController::class, 'pengurus'])->name('pengurus');
+Route::post('/flush-cache', [CacheController::class, 'flushCache']);
+
 // Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');
 
 Auth::routes();

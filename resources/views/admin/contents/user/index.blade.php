@@ -217,6 +217,25 @@
         });
 
         $('.addModal').on('click', function() {
+            // Lakukan AJAX request untuk flush cache
+            $.ajax({
+                url: '/flush-cache',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}' // Sertakan token CSRF
+                },
+                success: function(response) {
+                    console.log('Cache flushed successfully', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error flushing cache:', error);
+                    console.log('XHR:', xhr); // Ini akan memberikan detail lebih tentang error
+                    console.log('Status:', status);
+                }
+            });
+
+
+            // Lanjutkan dengan fungsi lainnya
             resetFileInput();
             makeInput();
             makeInput2();
@@ -226,6 +245,7 @@
 
             modalShow('myModal', 'Add Data');
         });
+
 
         $(document).on('click', '.view', function(e) {
             let id = $(this).data('id');

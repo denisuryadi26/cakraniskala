@@ -103,11 +103,14 @@ class UserController extends CoreController
             $profile_picture = $this->userService->find($id)->profile_picture;
         }
         if ($request->hasFile('dokument')) {
-            // dd($request);
+            // Proses file upload
             $dokument = $this->userService->insertFiles($uploadHandler, $this->userRepository->getModel(), $request, 'dokument', $id);
         } else {
-            $dokument = $this->userService->find($id)->dokument;
+            // Cek jika data ditemukan
+            $user = $this->userService->find($id);
+            $dokument = $user ? $user->dokument : null; // Jika tidak ada data, set null
         }
+
         $input['profile_picture'] = $profile_picture;
         $input['dokument'] = $dokument;
         $input['password'] = bcrypt($request->get('password'));
