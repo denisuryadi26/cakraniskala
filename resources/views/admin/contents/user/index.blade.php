@@ -26,6 +26,76 @@
     <div class="card-content">
         <div class="card-body">
 
+            <form action="" id="formFilter">
+
+                <div class="col-md-6 pl-2 mt-2">
+                    <form class="form form-horizontal" id="formFilterReport">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-3 col-form-label">
+                                        <label for="province_id">Nik</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="nik" name="nik" placeholder="Input Nik">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-3 col-form-label">
+                                        <label for="name">Nama</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Input Nama">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3 col-form-label">
+                                        <label for="status">Status</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2" id="status" name="status">
+                                            <option value="" selected disabled>Pilih Status</option>
+                                            <option value="1">Aktif</option>
+                                            <option value="2">Tidak Aktif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <br />
+                            <br />
+                            <br />
+
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <button type="button" class="btn btn-success text-bold submit-download" style="float: right !important;">
+                                            <span>Download</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-sm-3">
+
+                                        <button type="button" class="btn btn-primary text-bold submit-filter" style="float: right !important;">
+                                            Filter
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </form>
             <div class="card-datatable table-responsive">
                 <table id="contentTable" class="js-datatable table table-thead-bordered table-nowrap table-align-middle card-table table-striped table-hover" style="width:100%">
                     <thead class="thead-light">
@@ -120,101 +190,28 @@
             dateFormat: "Y-m-d",
             required: true
         }); // flatpickr
-        table = $('#contentTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: url.table,
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    title: '#',
-                    width: '2%'
-                },
-                {
-                    data: 'fullname',
-                    name: 'fullname'
-                },
-                {
-                    data: "profile_picture",
-                    className: 'dt-center',
-                    "render": function(data) {
-
-
-                        @if(env('APP_ENV') == 'production')
-                            (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
-                                img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
-                        return img;
-                        @else
-                        let img = '';
-                        (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
-                            img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
-                        @endif
-                        return img;
-                    }
-                },
-                {
-                    data: "dokument",
-                    className: 'dt-center',
-                    "render": function(data) {
-
-
-                        @if(env('APP_ENV') == 'production')
-                            (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
-                                img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
-                        return img;
-                        @else
-                        let img = '';
-                        (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
-                            img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
-                        @endif
-                        return img;
-                    }
-                },
-                {
-                    data: 'username',
-                    name: 'username'
-                },
-                {
-                    data: 'code',
-                    name: 'code'
-                },
-                {
-                    data: 'group.name',
-                    name: 'group',
-                    defaultContent: '#'
-                },
-                // {
-                //     data: 'status',
-                //     name: 'status',
-                //     render: function(data, type, row) {
-                //         if (data == 1) {
-                //             return 'Aktif';
-                //         } else if (data == 0) {
-                //             return 'Tidak Aktif';
-                //         } else {
-                //             return '';
-                //         }
-                //     }
-                // },
-                {
-                    data: 'status',
-                    name: 'status',
-                    "render": function(data) {
-                        let color = activeInactiveColor(data);
-
-                        return (data == 1 ? `<div class="badge bg-primary">Active</div>` : `<div class="badge bg-danger">Inactive</div>`)
-                    }
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false,
-                    className: 'text-center',
-                    width: '15%'
-                },
-            ]
+        $(document).on('click', '.submit-filter', function(e) {
+            $('#formFilter').submit();
         });
+        loadDataTable();
+
+        $('#formFilter').validate({ // initialize the plugin
+            rules: {
+                // termin_area: {
+                //     required: true,
+                // },
+            },
+            submitHandler: function(form) {
+                let nik = $('#nik').val();
+                let name = $('#name').val();
+                $('#contentTable').dataTable().fnDestroy();
+                loadDataTable(nik, name);
+                // let data = $('#formFilter').serialize();
+
+
+            }
+        });
+
 
         $('.addModal').on('click', function() {
             // Lakukan AJAX request untuk flush cache
@@ -631,6 +628,111 @@
         }
 
     });
+
+    function loadDataTable(nik, name) {
+        table = $('#contentTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                type: 'GET',
+                url: url.table,
+                data: {
+                    'nik': nik,
+                    'name': name,
+                }
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'id',
+                    title: '#',
+                    width: '2%'
+                },
+                {
+                    data: 'fullname',
+                    name: 'fullname'
+                },
+                {
+                    data: "profile_picture",
+                    className: 'dt-center',
+                    "render": function(data) {
+
+
+                        @if(env('APP_ENV') == 'production')
+                            (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
+                                img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
+                        return img;
+                        @else
+                        let img = '';
+                        (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
+                            img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
+                        @endif
+                        return img;
+                    }
+                },
+                {
+                    data: "dokument",
+                    className: 'dt-center',
+                    "render": function(data) {
+
+
+                        @if(env('APP_ENV') == 'production')
+                            (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
+                                img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
+                        return img;
+                        @else
+                        let img = '';
+                        (data ? img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('storage/images/${data}')}}'>` :
+                            img = `<img class="img-thumbnail img-responsive" style="max-width: 110px; max-height: 110px" src='{{asset('img/no_image.jpg')}}'>`)
+                        @endif
+                        return img;
+                    }
+                },
+                {
+                    data: 'username',
+                    name: 'username'
+                },
+                {
+                    data: 'code',
+                    name: 'code'
+                },
+                {
+                    data: 'group.name',
+                    name: 'group',
+                    defaultContent: '#'
+                },
+                // {
+                //     data: 'status',
+                //     name: 'status',
+                //     render: function(data, type, row) {
+                //         if (data == 1) {
+                //             return 'Aktif';
+                //         } else if (data == 0) {
+                //             return 'Tidak Aktif';
+                //         } else {
+                //             return '';
+                //         }
+                //     }
+                // },
+                {
+                    data: 'status',
+                    name: 'status',
+                    "render": function(data) {
+                        let color = activeInactiveColor(data);
+
+                        return (data == 1 ? `<div class="badge bg-primary">Active</div>` : `<div class="badge bg-danger">Inactive</div>`)
+                    }
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    width: '15%'
+                },
+            ]
+        });
+    }
 </script>
 
 @endsection

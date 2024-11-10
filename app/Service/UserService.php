@@ -96,10 +96,18 @@ class UserService extends CoreService
         return $this->userRepository->find($id, $relation);
     }
 
-    public function loadDataTable($access)
+    public function loadDataTable($access, $filter = null)
     {
-        $model = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori'])->get();
+        // dd($filter);
+        $model = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori']);
         // dd($model);
+        if (isset($filter) && $filter['nik']) {
+            $model->where(['nik' => $filter['nik']]);
+        }
+        if (isset($filter) && $filter['name']) {
+            $model->where('fullname', 'like', '%' . $filter['name'] . '%');
+        }
+
         // return $this->privilageBtnDatatable($model, $access);
         $data = DataTables::of($model)->addIndexColumn()
 

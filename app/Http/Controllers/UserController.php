@@ -155,9 +155,17 @@ class UserController extends CoreController
         return response()->json(['data' => $data], 200);
     }
 
-    public function __datatable()
+    public function __datatable(Request $request)
     {
-        return $this->load_data_table($this->userRepository);
+        $nik = $request->get('nik');
+        $name = $request->get('name');
+        // dd($nik);
+        $filter = [
+            'nik' => $nik,
+            'name' => $name,
+        ];
+        // return $this->userService->loadDataTable($request);
+        return $this->load_data_table($this->userRepository, $filter);
     }
 
     public function generateUserCode(Request $request)

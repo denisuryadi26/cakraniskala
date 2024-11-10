@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Dodi Priyanto<dodi.priyanto76@gmail.com>
  */
@@ -26,18 +27,19 @@ class UserRepository extends CoreRepository
         return $this->user->with("$relation")->find($id);
     }
 
-    public function get_all(){
+    public function get_all()
+    {
         return $this->user->withTrashed()->get();
     }
 
-    public function get_user_group(){
+    public function get_user_group()
+    {
         return $this->user->withTrashed()->with('group')->get();
     }
 
-    public function dataTable($access)
+    public function dataTable($access, $filter)
     {
         $data = new UserService($this);
-        return $data->loadDataTable($access);
+        return $data->loadDataTable($access, $filter);
     }
-
 }
