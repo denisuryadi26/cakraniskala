@@ -84,10 +84,11 @@
                             </fieldset> -->
 
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="group">Group</label>
+                                <label for="group">Jabatan</label>
                                 <div class="controls">
 
                                     <select class="select2 form-control form-control-lg" id="group" name="group_id" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Jabatan</option>
                                         @foreach($group as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -102,6 +103,7 @@
                                 <div class="controls">
 
                                     <select class="select2 form-control form-control-lg" id="agama" name="agama_id" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Agama</option>
                                         @foreach($agama as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -116,6 +118,7 @@
                                 <div class="controls">
 
                                     <select class="select2 form-control form-control-lg" id="kategori" name="kategori_id" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Kategory</option>
                                         @foreach($kategori as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -130,6 +133,7 @@
                                 <div class="controls">
 
                                     <select class="select2 form-control form-control-lg" id="sabuk" name="sabuk_id" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Sabuk</option>
                                         @foreach($sabuk as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -144,6 +148,7 @@
                                 <div class="controls">
 
                                     <select class="select2 form-control form-control-lg" id="unlat" name="unlat_id" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Unlat</option>
                                         @foreach($unlat as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -166,6 +171,7 @@
                                 <label for="status">Status Aktif</label>
                                 <div class="controls">
                                     <select class="select2 form-control form-control-lg" id="status" name="status" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Status</option>
                                         @foreach($status as $label => $value)
                                         <option value="{{ $label }}">{{ $value }}</option>
                                         @endforeach
@@ -207,13 +213,13 @@
                             <fieldset class="form-group floating-label-form-group mb-1">
                                 <label for="user-password">Enter Password</label>
                                 <div class="controls">
-                                    <input type="password" name="password" id="password" class="form-control" required data-validation-required-message="This field is required" placeholder="Enter Password">
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
                                 </div>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group mb-1">
                                 <label for="user-password">Confirm Password</label>
                                 <div class="controls">
-                                    <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re type password" required>
+                                    <input type="password" data-validation-match-match="password" class="form-control mb-1" placeholder="Re type password">
                                 </div>
                             </fieldset>
 

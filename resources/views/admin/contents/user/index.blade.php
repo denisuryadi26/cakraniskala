@@ -34,20 +34,20 @@
                             <div class="col-12">
                                 <div class="form-group row">
                                     <div class="col-sm-3 col-form-label">
-                                        <label for="province_id">Nik</label>
+                                        <label for="filternik">Nik</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nik" name="nik" placeholder="Input Nik">
+                                        <input type="number" class="form-control" id="filternik" name="filternik" placeholder="Input Nik">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group row">
                                     <div class="col-sm-3 col-form-label">
-                                        <label for="name">Nama</label>
+                                        <label for="filtername">Nama</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Input Nama">
+                                        <input type="text" class="form-control" id="filtername" name="filtername" placeholder="Input Nama">
                                     </div>
                                 </div>
                             </div>
@@ -202,10 +202,10 @@
                 // },
             },
             submitHandler: function(form) {
-                let nik = $('#nik').val();
-                let name = $('#name').val();
+                let filternik = $('#filternik').val();
+                let filtername = $('#filtername').val();
                 $('#contentTable').dataTable().fnDestroy();
-                loadDataTable(nik, name);
+                loadDataTable(filternik, filtername);
                 // let data = $('#formFilter').serialize();
 
 
@@ -270,8 +270,8 @@
                 makeInput2(response.dokument)
                 $('#group').val(response.group.id).trigger('change')
                 $('#unlat').val(response.unlat.id).trigger('change')
-                $('#sabuk').val(response.sabuk.id).trigger('change')
-                $('#kategori').val(response.kategori.id).trigger('change')
+                // $('#sabuk').val(response.sabuk.id).trigger('change')
+                // $('#kategori').val(response.kategori.id).trigger('change')
                 $('#agama').val(response.agama.id).trigger('change')
                 // $('#status').val(response.status).trigger('change')
                 $('#status').val(response.status)
@@ -305,8 +305,8 @@
                 makeInput2(response.dokument)
                 $('#group').val(response.group.id).trigger('change')
                 $('#unlat').val(response.unlat.id).trigger('change')
-                $('#sabuk').val(response.sabuk.id).trigger('change')
-                $('#kategori').val(response.kategori.id).trigger('change')
+                // $('#sabuk').val(response.sabuk.id).trigger('change')
+                // $('#kategori').val(response.kategori.id).trigger('change')
                 $('#agama').val(response.agama.id).trigger('change')
                 // $('#status').val(response.status).trigger('change')
                 $('#status').val(response.status).trigger('change.select2');
@@ -379,21 +379,20 @@
         })
 
 
-        $('#formModal').validate({ // initialize the plugin
+        $('#formModal').validate({
             rules: {
                 username: {
-                    required: true,
+                    required: false
                 },
                 fullname: {
-                    required: true,
+                    required: false
                 },
                 email: {
-                    required: true,
+                    required: false
                 },
                 group_id: {
-                    required: true,
+                    required: false
                 }
-
             },
             submitHandler: function(form) {
                 $.ajaxSetup({
@@ -401,50 +400,24 @@
                         'X-CSRF-TOKEN': CSRF_TOKEN
                     }
                 });
+
                 let id = $('#id').val();
                 let status = $('#status').val();
-
-
-                let image = $('#image').prop('files')[0],
-                    dokument = $('#dokument').prop('files')[0],
-                    form_data = new FormData(document.getElementById('formModal'));
+                let image = $('#image').prop('files')[0];
+                let dokument = $('#dokument').prop('files')[0];
+                let form_data = new FormData(document.getElementById('formModal'));
 
                 form_data.append('_token', $("input[name=_token]").val());
-                // form_data.append('_cache_id' , localStorage.getItem('cache_id'));
-
-                // let fullname = $('#fullname').val();
-                // let username = $('#username').val();
-                // let nik = $('#nik').val();
-                // let email = $('#email').val();
-                // let no_hp = $('#no_hp').val();
-                // let alamat = $('#alamat').val();
-                // let tempat_lahir = $('#tempat_lahir').val();
-                // let tgl_lahir = $('#tgl_lahir').val();
-                // let profile_picture = $('#profile_picture').val();
-                // let group = $('#group').val();
-                // let unlat = $('#unlat').val();
-                // let sabuk = $('#sabuk').val();
-                // let kategori = $('#kategori').val();
-                // let agama = $('#agama').val();
-                // let status = $('#status').val();
                 form_data.append('profile_picture', image);
                 form_data.append('dokument', dokument);
                 form_data.append('status', status);
                 form_data.append('id', id);
-                // form_data.append('fullname', fullname);
-                // form_data.append('username', username);
-                // form_data.append('nik', nik);
-                // form_data.append('email', email);
-                // form_data.append('no_hp', no_hp);
-                // form_data.append('alamat', alamat);
-                // form_data.append('tempat_lahir', tempat_lahir);
-                // form_data.append('tgl_lahir', tgl_lahir);
-                // form_data.append('group', group);
-                // form_data.append('unlat', unlat);
-                // form_data.append('sabuk', sabuk);
-                // form_data.append('kategori', kategori);
-                // form_data.append('agama', agama);
-                // form_data.append('status', status);
+
+                // Check if password is empty, if yes then delete from form_data
+                let password = $('#password').val();
+                if (password === "") {
+                    form_data.delete('password'); // Remove password if it's empty
+                }
 
                 $.ajax({
                     url: url.submit,
@@ -454,7 +427,6 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        // swalStatus(response, "myModal")
                         Swal.fire({
                             title: "Update Success",
                             text: response.message,
@@ -465,13 +437,9 @@
                     }
                 });
                 event.preventDefault();
-                // let data = $('#formModal').serialize();
-
-                // $.post(url.submit, data, function(result) {
-                //     swalStatus(result, "myModal", '', table)
-                // });
             }
         });
+
 
         // function activeLogic(param, field) {
         //     console.log(param);
@@ -629,7 +597,7 @@
 
     });
 
-    function loadDataTable(nik, name) {
+    function loadDataTable(filternik, filtername) {
         table = $('#contentTable').DataTable({
             processing: true,
             serverSide: true,
@@ -637,8 +605,8 @@
                 type: 'GET',
                 url: url.table,
                 data: {
-                    'nik': nik,
-                    'name': name,
+                    'nik': filternik,
+                    'name': filtername,
                 }
             },
             columns: [{

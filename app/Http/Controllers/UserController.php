@@ -113,7 +113,10 @@ class UserController extends CoreController
 
         $input['profile_picture'] = $profile_picture;
         $input['dokument'] = $dokument;
-        $input['password'] = bcrypt($request->get('password'));
+        // Only hash and set password if provided
+        if ($request->filled('password')) {
+            $input['password'] = bcrypt($request->get('password'));
+        }
         // dd($input);
         // Check if $id is not present
         if (empty($id)) {
