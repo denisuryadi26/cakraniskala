@@ -96,7 +96,7 @@
                 </div>
 
             </form>
-            <div class="card-datatable table-responsive">
+            <div class="card-datatable table-responsive" style="overflow-x: auto;">
                 <table id="contentTable" class="js-datatable table table-thead-bordered table-nowrap table-align-middle card-table table-striped table-hover" style="width:100%">
                     <thead class="thead-light">
                         <tr class="table100-head">
