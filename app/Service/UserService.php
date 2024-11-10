@@ -99,8 +99,9 @@ class UserService extends CoreService
     public function loadDataTable($access, $filter = null)
     {
         // dd($filter);
-        $model = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori']);
-        // dd($model);
+        $model = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori'])
+            ->orderBy('code', 'DESC'); // Add orderBy here
+
         if (isset($filter) && $filter['nik']) {
             $model->where(['nik' => $filter['nik']]);
         }
@@ -108,7 +109,6 @@ class UserService extends CoreService
             $model->where('fullname', 'like', '%' . $filter['name'] . '%');
         }
 
-        // return $this->privilageBtnDatatable($model, $access);
         $data = DataTables::of($model)->addIndexColumn()
 
             ->addColumn('action', function ($model) use ($access) {
@@ -125,25 +125,24 @@ class UserService extends CoreService
 
                 if ($access->is_viewable == true) {
                     $view_btn = "<button class='btn btn-icon btn-info btn-glow mr-1 mb-1 view'
-                                 data-toggle='tooltip' data-placement='top' title='View Data' id='view' data-parent_id='$parent_id' data-code='$model->code' data-id='$model->id' style='margin:3px'>
-                                    <i class='tf-icons ti ti-eye'></i>
-                            </button>";
+                             data-toggle='tooltip' data-placement='top' title='View Data' id='view' data-parent_id='$parent_id' data-code='$model->code' data-id='$model->id' style='margin:3px'>
+                                <i class='tf-icons ti ti-eye'></i>
+                        </button>";
                 }
 
                 if ($access->is_deletable == true) {
                     $model->name = ($model->name ? $model->name : ($model->username ? $model->username : $model->parameter));
                     $delete_btn = "<button class='btn btn-icon btn-danger btn-glow mr-1 mb-1 delete'
-                                 data-toggle='tooltip' data-placement='top' title='Delete Data' data-parent_id='$parent_id' id='delete' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
-                                    <i class='tf-icons ti ti-trash'></i>
-                               </button>";
+                             data-toggle='tooltip' data-placement='top' title='Delete Data' data-parent_id='$parent_id' id='delete' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
+                                <i class='tf-icons ti ti-trash'></i>
+                           </button>";
                 }
                 if ($access->is_editable == true) {
                     $update_btn = "<button class='btn btn-icon btn-warning btn-glow mr-1 mb-1 update'
-                                 data-toggle='tooltip' data-placement='top' title='Edit Data' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
-                                    <i class='tf-icons ti ti-pencil'></i>
-                               </button>";
+                             data-toggle='tooltip' data-placement='top' title='Edit Data' data-name='$model->name' style='margin:3px' data-code='$model->code' data-id='$model->id'>
+                                <i class='tf-icons ti ti-pencil'></i>
+                           </button>";
                 }
-
 
                 $action = $view_btn . $update_btn . $delete_btn;
                 return $action;
