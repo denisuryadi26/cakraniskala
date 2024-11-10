@@ -90,6 +90,12 @@ $unlat = Unlat::all();
                                     </div>
                                 </div>
                                 <p class="text-muted mb-4 mt-3">Silahkan isi data diri dengan benar.</p>
+                                @if ($errors->has('nik'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('nik') }}
+                                </div>
+                                @endif
+
                             </div>
 
                             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">

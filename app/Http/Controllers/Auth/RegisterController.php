@@ -54,9 +54,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:conf_users'],
-            // 'nik' => ['required', 'string', 'nik', 'max:255', 'unique:conf_users'],
+            'nik' => ['required', 'string', 'max:255', 'unique:conf_users,nik'], // Tambahkan unique untuk memeriksa duplikat
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'nik.unique' => 'NIK sudah ada, silakan gunakan NIK lain.', // Pesan error custom
         ]);
     }
 
