@@ -58,7 +58,7 @@
                                             <div class="d-flex flex-wrap my-50">
                                                 <div class="user-info-title">
                                                     <i data-feather="star" class="mr-1"></i>
-                                                    <span class="card-text user-info-title font-weight-bold mb-0">Group :</span>
+                                                    <span class="card-text user-info-title font-weight-bold mb-0">Jabatan :</span>
                                                 </div>
                                                 &nbsp;<p class="card-text mb-0">{{$profile->group->name}}</p>
                                             </div>
@@ -117,16 +117,16 @@
                     required: true,
                 },
                 fullname: {
-                    required: true,
+                    required: false,
                 },
                 email: {
-                    required: true,
+                    required: false,
                 },
                 password: {
-                    required: true,
+                    required: false,
                 },
                 confirm_password: {
-                    required: true,
+                    required: false,
                 }
 
             },
@@ -148,6 +148,12 @@
                 form_data.append('fileUpload', file_data);
                 form_data.append('id', id);
 
+
+                // Check if password is empty, if yes then delete from form_data
+                let password = $('#password').val();
+                if (password === "") {
+                    form_data.delete('password'); // Remove password if it's empty
+                }
 
                 $.ajax({
                     url: url.submit,
