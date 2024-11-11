@@ -50,10 +50,8 @@
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="tgl_lahir">Tanggal Lahir</label>
                                 <div class="controls">
-                                    <!-- <input type="date" class="form-control" name="tgl_lahir" required> -->
-                                    <input class="form-control" id="tgl_lahir" name="tgl_lahir" required>
-                                    <!-- <input type="text" id="pd-months-year" class="form-control pickadate-months-year" name="tgl_lahir" required /> -->
-                                    <!-- <input type="text" id="tgl_lahir" name="tgl_lahir" class="form-control pickadate-months-year" placeholder="18 June, 2020" /> -->
+                                    <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+                                    <!-- <input class="form-control" id="tgl_lahir" name="tgl_lahir" required> -->
                                 </div>
 
                                 <!-- <div class="col-12 col-md-6 form-group">
