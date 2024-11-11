@@ -185,11 +185,11 @@
 
     $(document).ready(function() {
         var CSRF_TOKEN = "{{@csrf_token()}}";
-        const tglLahir = flatpickr("#tgl_lahir", {
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            required: true
-        }); // flatpickr
+        // const tglLahir = flatpickr("#tgl_lahir", {
+        //     enableTime: false,
+        //     dateFormat: "Y-m-d",
+        //     required: true
+        // });
         $(document).on('click', '.submit-filter', function(e) {
             $('#formFilter').submit();
         });
