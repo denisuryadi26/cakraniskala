@@ -58,6 +58,7 @@ Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/pengurus', [HomeController::class, 'pengurus'])->name('pengurus');
+Route::get('/biodata/{id}', [HomeController::class, 'biodata'])->name('biodata');
 Route::post('/flush-cache', [CacheController::class, 'flushCache']);
 
 // Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials');

@@ -9,6 +9,7 @@ use App\Models\Generator\Slider;
 use App\Models\Generator\Pengurus;
 use App\Models\Generator\Perguruan;
 use App\Models\Generator\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -111,6 +112,27 @@ class HomeController extends Controller
         return view('front.services', compact(
             'services',
             'contact',
+        ));
+    }
+
+    public function biodata(Request $request, $code)
+    {
+
+        $about = About::first();
+        $perguruans = Perguruan::all();
+        $penguruses = Pengurus::all();
+        $contact = Contact::first();
+        $services = Service::all();
+        $user = User::withoutTrashed()->where('code', $code)->first(); // Contoh penggunaan ID
+        // dd($user); // Untuk debug dan memastikan ID-nya tertangkap
+
+        return view('front.biodata', compact(
+            'about',
+            'perguruans',
+            'penguruses',
+            'contact',
+            'services',
+            'user',
         ));
     }
 }
