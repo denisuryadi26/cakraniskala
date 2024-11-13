@@ -70,6 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $getSequence = $this->userService->getSequence();
+        $data['name'] = ucwords(strtolower($data['name']));
         // dd($getSequence);
         $sum = 1;
         $updateSequence = $sum += $getSequence;
