@@ -14,7 +14,7 @@
 
         <a href="{{route('dashboard')}}" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img class="" alt="logo" style="width: 40px !important; height: 40px !important;" src="{{ (!empty($setting['logo_icon']) ? asset('upload/'.$setting['logo_icon']) : asset('vuexy/assets/img/logo-sm-dark-cn.png')) }}">
+                <img class="" alt="logo" style="width: 40px !important; height: 40px !important;" src="{{ (!empty($setting['logo_icon']) ? asset('upload/'.$setting['logo_icon']) : asset('vuexy/assets/img/logo-cn.png')) }}">
             </span>
             <span class="app-brand-text demo menu-text fw-bold" style="font-size: 15px;">{{ ($setting['app_name_short'] ? $setting['app_name_short'] : '') }}</span>
         </a>
