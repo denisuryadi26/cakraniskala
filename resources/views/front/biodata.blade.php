@@ -89,11 +89,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="{{ asset('storage/images/'.$user->profile_picture) }}" alt="Admin" class="rounded-circle" width="150">
+                                    <img src="{{ asset('storage/images/'.$user->profile_picture) }}" alt="Admin" width="150">
                                     <div class="mt-3">
                                         <h4>{{ $user->fullname }}</h4>
-                                        <p class="text-secondary mb-1">{{ $user->nik }}</p>
-                                        <p class="text-muted font-size-sm">{!! nl2br(e($user->alamat)) !!}</p>
+                                        <p class="text-secondary mb-1">{{ $user->code }}</p>
+                                        <hr>
+                                        <p class="text-muted font-size-sm">Alamat : {!! nl2br(e($user->alamat)) !!}</p>
+                                        <hr>
+                                        <p class="text-muted font-size-sm">Sekretariat Pusat : Perum Bukit Waringin, Blok D 13 No 16 Rt 14 Rw 10
+                                            Kec. Bojonggede Kab. Bogor, Jawa Barat 16922
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +110,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
+                                        <h6 class="mb-0">Nama Lengkap</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         {{ $user->fullname }}
