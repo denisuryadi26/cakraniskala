@@ -1,50 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="vertical" data-topbar-color="dark">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{asset('vuexy/assets/')}}" data-template="vertical-menu-template">
 
 <head>
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="ws_url" content="{{ env('WS_URL') }}">
     <meta name="user_id" content="{{Auth::id() }}">
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{asset('vuexy/assets/img/favicon/favicon.ico')}}" />
     <!-- Title -->
     <title> {{env('APP_NAME') }} @hasSection('title') - @yield('title') @else - @endif </title>
 
-    <!-- App favicon -->
-    <!-- <link rel="shortcut icon" href="{{asset('ubold/assets/images/favicon.ico')}}"> -->
-    <link rel="shortcut icon" href="{{asset('ubold/assets/images/favicon-cn.png')}}">
-
-    <!-- third party css -->
-    <link href="{{asset('ubold/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- third party css end -->
-
-    <!-- Plugins css -->
-    <link href="{{asset('ubold/assets/libs/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/mohithg-switchery/switchery.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Theme Config Js -->
-    <script src="{{asset('ubold/assets/js/head.js')}}"></script>
-
-    <!-- Bootstrap css -->
-    <link href="{{asset('ubold/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- App css -->
-    <link href="{{asset('ubold/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Icons css -->
-    <link href="{{asset('ubold/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/fontawesome.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/tabler-icons.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/flag-icons.css')}}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/core.css')}}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/theme-default.css')}}" class="template-customizer-theme-css" />
+    <!-- <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/core.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/theme-default.css')}}" /> -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/css/demo.css')}}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/node-waves/node-waves.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/flatpickr/flatpickr.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/select2/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/tagify/tagify.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/bootstrap-select/bootstrap-select.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/animate-css/animate.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{{asset('vuexy/assets/vendor/js/helpers.js')}}">
+    </script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{asset('vuexy/assets/js/config.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('tables/css/datatable/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('tables/css/datatable/responsive.bootstrap4.min.css')}}">
 
@@ -56,8 +69,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('lib/bootstrap-fileinput/css/fileinput.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('lib/font-awesome/css/font-awesome.min.css')}}">
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('tables/css/pickers/flatpickr/flatpickr.min.css')}}">--}}
-
     <link rel="stylesheet" type="text/css" href="{{asset('lib/select2/css/select2.min.css')}}">
 
     @yield('stylesheet')
@@ -65,110 +76,99 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <div class="app-menu">
-            <!-- Brand Logo -->
-            <div class="logo-box">
-                <!-- Brand Logo Light -->
-                <a href="{{ route('dashboard') }}" class="logo-light">
-                    <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="logo" class="logo-lg">
-                    <img src="{{asset('ubold/assets/images/logo-sm-light-cn.png')}}" alt="small logo" class="logo-sm">
-                </a>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
 
-                <!-- Brand Logo Dark -->
-                <a href="{{ route('dashboard') }}" class="logo-dark">
-                    <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="dark logo" class="logo-lg">
-                    <img src="{{asset('ubold/assets/images/logo-sm-dark-cn.png')}}" alt="small logo" class="logo-sm">
-                </a>
-            </div>
-            <!-- menu-left -->
-            <div class="scrollbar">
+            @include('admin.templates.sidebar')
 
-                <!--- Menu -->
-                @include('admin.templates.sidebar')
-                <!--- End Menu -->
-                <div class="clearfix"></div>
+            <!-- Layout container -->
+            <div class="layout-page">
+                @include('admin.templates.header')
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+
+                    <!-- ========== MAIN CONTENT ========== -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        @yield('breadcumbs')
+
+                        <!-- <div class="card"> -->
+                        <!-- <h5 class="card-header">Ajax Sourced Server-side</h5> -->
+
+                        @yield('content')
+                        <!-- </div> -->
+                    </div>
+                    @include('admin.templates.footer')
+
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
             </div>
         </div>
-        <div class="content-page">
-            <!-- ========== HEADER ========== -->
-            @include('admin.templates.header')
-            <!-- ========== END HEADER ========== -->
 
-            <div class="content">
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
 
-                <!-- Start Content-->
-                <div class="container-fluid">
-
-                    <!-- start page title -->
-                    @yield('breadcumbs')
-                    <!-- end page title -->
-
-                    @yield('content')
-                    <!-- end row-->
-
-                </div> <!-- container -->
-
-            </div> <!-- content -->
-
-            <!-- Footer Start -->
-            @include('admin.templates.footer')
-            <!-- end Footer -->
-        </div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
     </div>
-    <!-- ========== END MAIN CONTENT ========== -->
-
     <!-- ========== END SECONDARY CONTENTS ========== -->
 
-    <!-- Vendor js -->
-    <script src="{{asset('ubold/assets/js/vendor.min.js')}}"></script>
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
 
-    <!-- App js -->
-    <script src="{{asset('ubold/assets/js/app.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/selectize/js/standalone/selectize.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/mohithg-switchery/switchery.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/multiselect/js/jquery.multi-select.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/select2/js/select2.min.js')}}"></script>
-    <!-- <script src="{{asset('ubold/assets/libs/jquery-mockjax/jquery.mockjax.min.js')}}"></script> -->
-    <script src="{{asset('ubold/assets/libs/devbridge-autocomplete/jquery.autocomplete.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
 
-    <!-- Plugins js-->
-    <script src="{{asset('ubold/assets/libs/flatpickr/flatpickr.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/apexcharts/apexcharts.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/selectize/js/standalone/selectize.min.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/hammer/hammer.js')}}"></script>
 
-    <!-- third party js -->
-    <script src="{{asset('ubold/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
-    <script src="{{asset('ubold/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
-    <!-- third party js ends -->
+    <!-- endbuild -->
 
-    <!-- Datatables init -->
-    <!-- <script src="{{asset('ubold/assets/js/pages/datatables.init.js')}}"></script> -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="{{asset('vuexy/assets/vendor/libs/jquery/jquery.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/popper/popper.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/js/bootstrap.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/node-waves/node-waves.js')}}"></script>
 
-    <!-- Init js-->
-    <script src="{{asset('ubold/assets/js/pages/form-advanced.init.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/hammer/hammer.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/i18n/i18n.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
 
-    <!-- Dashboar 1 init js-->
-    <script src="{{asset('ubold/assets/js/pages/dashboard-1.init.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/js/menu.js')}}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="{{asset('vuexy/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/select2/select2.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/tagify/tagify.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/bootstrap-select/bootstrap-select.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/bloodhound/bloodhound.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/swiper/swiper.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
+    <script src="{{asset('vuexy/assets/js/extended-ui-sweetalert2.js')}}"></script>
+    <!-- Flat Picker -->
+    <script src="{{asset('vuexy/assets/vendor/libs/moment/moment.js')}}"></script>
+    <script src="{{asset('vuexy/assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
+
+    <!-- Main JS -->
+    <script src="{{asset('vuexy/assets/js/main.js')}}"></script>
+    <!-- Page JS -->
+    <script src="{{asset('vuexy/assets/js/dashboards-analytics.js')}}"></script>
+
+    <!-- Page JS -->
+    <script src="{{asset('vuexy/assets/js/tables-datatables-advanced.js')}}"></script>
+    <script src="{{asset('vuexy/assets/js/forms-selects.js')}}"></script>
+    <script src="{{asset('vuexy/assets/js/forms-tagify.js')}}"></script>
+    <script src="{{asset('vuexy/assets/js/forms-typeahead.js')}}"></script>
 
     <!-- jquery-validation Js -->
 
     <script src="{{asset('lib/jquery-validation/js/jquery.validate.min.js')}}"></script>
     <script src="{{asset('lib/form/form-validation.js')}}"></script>
-    <script src="{{asset('lib/sweetalert2/sweetalert2.js')}}"></script>
+    <!-- <script src="{{asset('lib/sweetalert2/sweetalert2.js')}}"></script> -->
 
     <!-- JS Front -->
     <script src="{{asset('tables/js/datatable/jquery.dataTables.min.js')}}"></script>
@@ -186,16 +186,14 @@
     <script src="{{asset('lib/charts/js/chart-apex.js')}}"></script>
     <script src="{{asset('lib/charts/js/apexcharts.js')}}"></script>
 
-    <!-- {{--SOCKET JS--}}
-    <script src="{{ asset('lib/socket/vue.js') }}"></script>
+    {{--SOCKET JS--}}
+    <!-- <script src="{{ asset('lib/socket/vue.js') }}"></script>
     <script src="{{ asset('lib/socket/socket.io.js') }}"></script>
     <script src="{{ asset('lib/socket/moment.min.js') }}"></script>
     <script src="{{ asset('lib/socket/chat.js') }}"></script>
-    <script src="{{ asset('lib/socket/notif.js') }}"></script>
-    {{--SOCKET JS--}} -->
+    <script src="{{ asset('lib/socket/notif.js') }}"></script> -->
+    {{--SOCKET JS--}}
 
-
-    <!-- End Style Switcher JS -->
 
     @yield('script')
 </body>

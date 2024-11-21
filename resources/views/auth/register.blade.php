@@ -2,39 +2,62 @@
 <html lang="en" data-layout="horizontal" data-topbar-color="dark">
 
 <head>
-    <meta charset="utf-8" />
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="ws_url" content="{{ env('WS_URL') }}">
+    <meta name="user_id" content="{{Auth::id() }}">
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{asset('vuexy/assets/img/favicon/favicon.ico')}}" />
+    <!-- Title -->
     <title>Register & Signup | Carka Niskala</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('ubold/assets/images/favicon-cn.png')}}">
-
-    <!-- third party css -->
-    <link href="{{asset('ubold/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- third party css end -->
-
-    <!-- Plugins css -->
-    <link href="{{asset('ubold/assets/libs/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('ubold/assets/libs/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Theme Config Js -->
-    <script src="{{asset('ubold/assets/js/head.js')}}"></script>
-
-    <!-- Bootstrap css -->
-    <link href="{{asset('ubold/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- App css -->
-    <link href="{{asset('ubold/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Icons css -->
-    <link href="{{asset('ubold/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/fontawesome.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/tabler-icons.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/fonts/flag-icons.css')}}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/core.css')}}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/theme-default.css')}}" class="template-customizer-theme-css" />
+    <!-- <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/core.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/css/rtl/theme-default.css')}}" /> -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/css/demo.css')}}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/node-waves/node-waves.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/flatpickr/flatpickr.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/select2/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/tagify/tagify.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/bootstrap-select/bootstrap-select.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/animate-css/animate.css')}}" />
+    <link rel="stylesheet" href="{{asset('vuexy/assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{{asset('vuexy/assets/vendor/js/helpers.js')}}">
+    </script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{asset('vuexy/assets/js/config.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('tables/css/datatable/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('tables/css/datatable/responsive.bootstrap4.min.css')}}">
 
@@ -46,9 +69,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('lib/bootstrap-fileinput/css/fileinput.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('lib/font-awesome/css/font-awesome.min.css')}}">
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('tables/css/pickers/flatpickr/flatpickr.min.css')}}">--}}
-
     <link rel="stylesheet" type="text/css" href="{{asset('lib/select2/css/select2.min.css')}}">
+
+    @yield('stylesheet')
+
 </head>
 @php
 use App\Models\Group;
@@ -78,13 +102,13 @@ $unlat = Unlat::all();
                                     <div class="auth-brand">
                                         <a href="{{ route('register') }}" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('ubold/assets/images/logo-dark-cn.png')}}" alt="" height="22">
+                                                <img src="{{asset('vuexy/assets/img/logo-dark-cn.png')}}" alt="" height="22">
                                             </span>
                                         </a>
 
                                         <a href="{{ route('register') }}" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('ubold/assets/images/logo-light-cn.png')}}" alt="" height="22">
+                                                <img src="{{asset('vuexy/assets/img/logo-light-cn.png')}}" alt="" height="22">
                                             </span>
                                         </a>
                                     </div>
