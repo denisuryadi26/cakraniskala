@@ -164,7 +164,7 @@ $unlat = Unlat::all();
                                                 <select class="select2 form-control form-control-lg" id="group" name="group_id" style="padding:10px !important;" required data-validation-required-message="Harap Masukkan Email">
                                                     <option value="" selected disabled>Pilih Jabatan</option>
                                                     @foreach($group as $item)
-                                                    @if($item->name === 'Anggota' || $item->name === 'Pengurus/Pelatih' || $item->name === 'Anggota Kehormatan')
+                                                    @if($item->name === 'Anggota')
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endif
                                                     @endforeach

@@ -110,9 +110,18 @@ class UserController extends CoreController
             $user = $this->userService->find($id);
             $dokument = $user ? $user->dokument : null; // Jika tidak ada data, set null
         }
+        if ($request->hasFile('kta')) {
+            // Proses file upload
+            $kta = $this->userService->insertFiles($uploadHandler, $this->userRepository->getModel(), $request, 'kta', $id);
+        } else {
+            // Cek jika data ditemukan
+            $user = $this->userService->find($id);
+            $kta = $user ? $user->kta : null; // Jika tidak ada data, set null
+        }
 
         $input['profile_picture'] = $profile_picture;
         $input['dokument'] = $dokument;
+        $input['kta'] = $kta;
         // Only hash and set password if provided
         if ($request->filled('password')) {
             $input['password'] = bcrypt($request->get('password'));

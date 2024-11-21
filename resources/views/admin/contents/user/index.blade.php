@@ -108,6 +108,7 @@
                             <th>Kode Anggota</th>
                             <!-- <th>Email</th> -->
                             <th>Group</th>
+                            <th>KTA</th>
                             <th>Status</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -236,6 +237,7 @@
             resetFileInput();
             makeInput();
             makeInput2();
+            makeInput3();
             generateUserCode();
             formReset(true);
             $(".modal").removeAttr("tabindex");
@@ -268,13 +270,15 @@
                 $('#tgl_lahir').val(response.tgl_lahir)
                 makeInput(response.profile_picture)
                 makeInput2(response.dokument)
+                makeInput3(response.kta)
                 $('#group').val(response.group.id).trigger('change')
                 $('#unlat').val(response.unlat.id).trigger('change')
                 // $('#sabuk').val(response.sabuk.id).trigger('change')
                 // $('#kategori').val(response.kategori.id).trigger('change')
                 $('#agama').val(response.agama.id).trigger('change')
                 // $('#status').val(response.status).trigger('change')
-                $('#status').val(response.status)
+                $('#status').val(response.status).trigger('change.select2')
+                $('#is_kta').val(response.is_kta).trigger('change.select2');
                 // activeLogic(response.status, 'status')
             });
 
@@ -303,13 +307,15 @@
                 $('#tgl_lahir').val(response.tgl_lahir)
                 makeInput(response.profile_picture)
                 makeInput2(response.dokument)
+                makeInput3(response.kta)
                 $('#group').val(response.group.id).trigger('change')
                 $('#unlat').val(response.unlat.id).trigger('change')
                 // $('#sabuk').val(response.sabuk.id).trigger('change')
                 // $('#kategori').val(response.kategori.id).trigger('change')
                 $('#agama').val(response.agama.id).trigger('change')
                 // $('#status').val(response.status).trigger('change')
-                $('#status').val(response.status).trigger('change.select2');
+                $('#status').val(response.status).trigger('change.select2')
+                $('#is_kta').val(response.is_kta).trigger('change.select2');
                 // activeLogic(response.status, 'status')
             });
 
@@ -405,11 +411,13 @@
                 let status = $('#status').val();
                 let image = $('#image').prop('files')[0];
                 let dokument = $('#dokument').prop('files')[0];
+                let kta = $('#kta').prop('files')[0];
                 let form_data = new FormData(document.getElementById('formModal'));
 
                 form_data.append('_token', $("input[name=_token]").val());
                 form_data.append('profile_picture', image);
                 form_data.append('dokument', dokument);
+                form_data.append('kta', kta);
                 form_data.append('status', status);
                 form_data.append('id', id);
 
@@ -462,6 +470,7 @@
         function resetFileInput() {
             $('#image').fileinput('destroy');
             $('#ktp_image').fileinput('destroy');
+            $('#kta').fileinput('destroy');
         }
 
         function makeInput(value) {
@@ -550,6 +559,59 @@
 
             } else {
                 $("#dokument").fileinput({
+                    'showUpload': false,
+                    theme: 'fa',
+                    'previewFileType': 'any',
+                    fileActionSettings: {
+                        showDrag: false,
+                    },
+                    allowedFileExtensions: ['jpg', 'gif', 'png', 'jpeg'],
+                    initialPreviewAsData: true,
+                    layoutTemplates: {
+                        progress: '',
+                        remove: ''
+                    },
+                    initialPreviewShowDelete: true
+                        //, deleteUrl: '{{route('file_delete')}}'
+                        ,
+                    elErrorContainer: '#kartik-file-errors',
+                });
+            }
+        }
+
+        function makeInput3(value) {
+            // $('#image').fileinput('destroy');
+            $('#kta').fileinput('destroy');
+
+            if (value) {
+                let url = "{{asset('storage/images/')}}" + '/' + `${value}`
+                let filename = value.split('/')[1];
+                $("#kta").fileinput({
+                    'showUpload': false,
+                    theme: 'fa',
+                    showClose: false,
+                    showMove: false,
+                    initialPreviewConfig: [{
+                        caption: `${filename}`,
+                        downloadUrl: url,
+                        key: 1
+                    }],
+                    initialPreview: url,
+                    initialPreviewAsData: true,
+                    layoutTemplates: {
+                        progress: '',
+                        remove: ''
+                    },
+                    allowedFileExtensions: ["jpg", "png", "gif"],
+                    initialPreviewShowDelete: false,
+                    //{{--deleteUrl: '{{route('file_delete')}}',--}}
+                    elErrorContainer: '#kartik-file-errors',
+                });
+
+                $(".glyphicon").removeClass("glyphicon-download").removeClass('glyphicon').addClass('fa fa-download');
+
+            } else {
+                $("#kta").fileinput({
                     'showUpload': false,
                     theme: 'fa',
                     'previewFileType': 'any',
@@ -681,6 +743,15 @@
                 //         }
                 //     }
                 // },
+                {
+                    data: 'is_kta',
+                    name: 'is_kta',
+                    "render": function(data) {
+                        let color = activeInactiveColor(data);
+
+                        return (data == 1 ? `<div class="badge bg-primary">Yes</div>` : `<div class="badge bg-danger">No</div>`)
+                    }
+                },
                 {
                     data: 'status',
                     name: 'status',

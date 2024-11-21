@@ -58,7 +58,9 @@ class User extends Authenticatable implements Auditable, JWTSubject
         'password',
         'profile_picture',
         'dokument',
+        'kta',
         'status',
+        'is_kta',
         'created_by',
         'updated_by',
     ];

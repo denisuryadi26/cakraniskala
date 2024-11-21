@@ -166,6 +166,19 @@
                             </fieldset>
 
                             <fieldset class="form-group floating-label-form-group">
+                                <label for="is_kta">Status KTA</label>
+                                <div class="controls">
+                                    <select class="select2 form-control form-control-lg" id="is_kta" name="is_kta" style="padding:10px !important;">
+                                        <option value="" selected disabled>Pilih Status KTA</option>
+                                        @foreach($status as $label => $value)
+                                        <option value="{{ $label }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group floating-label-form-group">
                                 <label for="status">Status Aktif</label>
                                 <div class="controls">
                                     <select class="select2 form-control form-control-lg" id="status" name="status" style="padding:10px !important;">
@@ -229,6 +242,11 @@
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="user-name">Foto Ijazah/Akte Kelahiran (Hanya Foto)</label>
                                 <input type="file" class="files" id="dokument" name="dokument" accept=".jpg,.png,.svg">
+                            </fieldset>
+
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="user-name">KTA</label>
+                                <input type="file" class="files" id="kta" name="kta" accept=".jpg,.png,.svg">
                             </fieldset>
                         </div>
                         <!-- <fieldset class="form-group floating-label-form-group">

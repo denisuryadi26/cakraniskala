@@ -215,6 +215,13 @@ class UserService extends CoreService
             $file->storeAs("public/images/", $filename);
             return $filename;
         };
+
+        if ($request->hasFile('kta')) {
+            $file = $request['kta'];
+            $filename = $directory . '/' . $this->random_string(20) . '.' . $file->extension();
+            $file->storeAs("public/images/", $filename);
+            return $filename;
+        };
         return $user;
     }
 
