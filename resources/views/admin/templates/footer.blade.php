@@ -6,7 +6,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                , made with ❤️ by <a href="https://brawijayahospital.com/" target="_blank" class="fw-medium">Brawijaya Hospital</a>
+                , made with ❤️ by <a href="https://cakraniskala.web.id/" target="_blank" class="fw-medium">Cakra Niskala</a>
             </div>
         </div>
     </div>
