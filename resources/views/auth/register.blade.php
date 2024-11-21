@@ -122,7 +122,7 @@ $unlat = Unlat::all();
 
                             </div>
 
-                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="nik-form">
                                 @csrf
 
                                 <div class="row">
@@ -138,7 +138,17 @@ $unlat = Unlat::all();
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="nik">NIK</label>
                                             <div class="controls">
-                                                <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" required data-validation-required-message="Harap Masukkan NIK" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="nik"
+                                                    name="nik"
+                                                    placeholder="NIK"
+                                                    required
+                                                    maxlength="16"
+                                                    oninput="validateNIK(this)"
+                                                    title="NIK harus terdiri dari 16 digit angka">
+                                                <small id="error-message" style="color: red; display: none;">NIK harus 16 digit angka</small>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -340,6 +350,37 @@ $unlat = Unlat::all();
     <!-- end page -->
 
     <script>
+        function validateNIK(input) {
+            const value = input.value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Remove any non-numeric input
+            input.value = value.replace(/\D/g, "");
+
+            // Check if the length is exactly 16
+            if (value.length > 16) {
+                input.value = value.slice(0, 16);
+            }
+
+            // Display error message if less than 16 digits
+            if (input.value.length < 16) {
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        }
+
+        document.getElementById("nik-form").addEventListener("submit", function(event) {
+            const nikInput = document.getElementById("nik");
+
+            // Prevent form submission if NIK is not exactly 16 digits
+            if (nikInput.value.length !== 16) {
+                event.preventDefault();
+                const errorMessage = document.getElementById("error-message");
+                errorMessage.style.display = "block";
+            }
+        });
+
         function resetFileInput() {
             $('#fileUpload').fileinput('destroy');
         }
