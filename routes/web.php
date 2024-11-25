@@ -187,6 +187,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => ['auth', 'roles']], f
         Route::get('/delete', [UserController::class, 'destroy'])->name('dashboard_user_delete');
         Route::post('/', [UserController::class, 'store'])->name('dashboard_user_post');
         Route::get('/datatable.json', [UserController::class, '__datatable'])->name('dashboard_user_table');
+        Route::get('/download-user', [UserController::class, 'downloadUsers'])->name('dashboard_user_download');
         Route::get('/get-code', [UserController::class, 'generateUserCode'])->name('dashboard_request_user_register_generate_code');
     });
 

@@ -61,6 +61,32 @@ class UserService extends CoreService
         return $this->userRepository->all();
     }
 
+    public function getUserList($nik = null, $name = null, $unlat = null, $status = null)
+    {
+
+        $data = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori'])
+            ->orderBy('code', 'DESC'); // Add orderBy here
+
+        if ($nik) {
+            $data->where(DB::raw('nik'), $nik);
+        }
+
+        if ($name) {
+            $data->where(DB::raw('name'), $name);
+        }
+
+        if ($unlat) {
+            $data->where(DB::raw('unlat_id'), $unlat);
+        }
+
+        if ($status) {
+            $data->whereIn('status', $status);
+        }
+
+        // dd($data->get());
+        return $data->get();
+    }
+
     public function generateUserCode(array $param)
     {
         $row = SequenceCode::withoutTrashed()->where($param)->first();
@@ -107,6 +133,12 @@ class UserService extends CoreService
         }
         if (isset($filter) && $filter['name']) {
             $model->where('fullname', 'like', '%' . $filter['name'] . '%');
+        }
+        if (isset($filter['status']) && $filter['status'] !== null) {
+            $model->where(['status' => $filter['status']]);
+        }
+        if (isset($filter) && $filter['unlat']) {
+            $model->where(['unlat_id' => $filter['unlat']]);
         }
 
         $data = DataTables::of($model)->addIndexColumn()

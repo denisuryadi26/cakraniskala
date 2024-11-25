@@ -52,20 +52,36 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group row">
                                     <div class="col-sm-3 col-form-label">
-                                        <label for="status">Status</label>
+                                        <label for="filterstatus">Status</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <select class="form-control select2" id="status" name="status">
+                                        <select class="form-control select2" id="filterstatus" name="filterstatus">
                                             <option value="" selected disabled>Pilih Status</option>
                                             <option value="1">Aktif</option>
-                                            <option value="2">Tidak Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-3 col-form-label">
+                                        <label for="filterunlat">Unlat</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2" id="filterunlat" name="filterunlat">
+                                            <option value="" selected disabled>Pilih Unlat</option>
+                                            @foreach($unlat as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <br />
                             <br />
@@ -162,6 +178,7 @@
         delete: "{{route('dashboard_user_delete')}}",
         submit: "{{route('dashboard_user_post')}}",
         table: "{{route('dashboard_user_table')}}",
+        download: "{{route('dashboard_user_download')}}",
         generate_user_code: "{{route('dashboard_request_user_register_generate_code')}}"
     };
     var table;
@@ -194,6 +211,40 @@
         $(document).on('click', '.submit-filter', function(e) {
             $('#formFilter').submit();
         });
+
+        $(document).on('click', '.submit-download', function(e) {
+            e.preventDefault(); // Mencegah aksi default tombol (opsional)
+
+            let filternik = $('#filternik').val(),
+                filtername = $('#filtername').val(),
+                filterstatus = $('#filterstatus').val(),
+                filterunlat = $('#filterunlat').val();
+
+            let finalUrl = url.download; // Base URL
+            let params = []; // Array untuk menampung parameter query string
+
+            // Cek dan tambahkan setiap filter yang tidak kosong
+            if (filternik) {
+                params.push(`nik=${encodeURIComponent(filternik)}`);
+            }
+            if (filtername) {
+                params.push(`name=${encodeURIComponent(filtername)}`);
+            }
+            if (filterstatus) {
+                params.push(`status=${encodeURIComponent(filterstatus)}`);
+            }
+            if (filterunlat) {
+                params.push(`unlat=${encodeURIComponent(filterunlat)}`);
+            }
+
+            // Gabungkan base URL dengan parameter query string jika ada
+            if (params.length > 0) {
+                finalUrl += `?${params.join('&')}`;
+            }
+
+            window.open(finalUrl); // Buka URL dengan filter dalam tab baru
+        });
+
         loadDataTable();
 
         $('#formFilter').validate({ // initialize the plugin
@@ -205,8 +256,10 @@
             submitHandler: function(form) {
                 let filternik = $('#filternik').val();
                 let filtername = $('#filtername').val();
+                let filterstatus = $('#filterstatus').val();
+                let filterunlat = $('#filterunlat').val();
                 $('#contentTable').dataTable().fnDestroy();
-                loadDataTable(filternik, filtername);
+                loadDataTable(filternik, filtername, filterstatus, filterunlat);
                 // let data = $('#formFilter').serialize();
 
 
@@ -659,7 +712,7 @@
 
     });
 
-    function loadDataTable(filternik, filtername) {
+    function loadDataTable(filternik, filtername, filterstatus, filterunlat) {
         table = $('#contentTable').DataTable({
             processing: true,
             serverSide: true,
@@ -669,6 +722,8 @@
                 data: {
                     'nik': filternik,
                     'name': filtername,
+                    'status': filterstatus,
+                    'unlat': filterunlat,
                 }
             },
             columns: [{

@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserList;
 use App\Models\User;
 use App\Repository\UserRepository;
 use App\Service\GroupService;
@@ -17,6 +18,7 @@ use App\Service\Generator\SequenceCodeService;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use App\Service\UploadHandler;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends CoreController
 {
@@ -171,10 +173,14 @@ class UserController extends CoreController
     {
         $nik = $request->get('nik');
         $name = $request->get('name');
+        $status = $request->get('status');
+        $unlat = $request->get('unlat');
         // dd($nik);
         $filter = [
             'nik' => $nik,
             'name' => $name,
+            'status' => $status,
+            'unlat' => $unlat,
         ];
         // return $this->userService->loadDataTable($request);
         return $this->load_data_table($this->userRepository, $filter);
@@ -187,5 +193,50 @@ class UserController extends CoreController
         $data = $this->userService->generateUserCode(['type' => 'CN']);
 
         return response()->json(['data' => $data], 200);
+    }
+
+    public function downloadUsers(Request $request)
+    {
+        // dd($request);
+        $status = $request->get('status');
+        $unlat = $request->get('unlat');
+        $nik = $request->get('nik');
+        $name = $request->get('name');
+        // dd($request);
+        $filename = "user_list";
+        $filter = [];
+
+        if ($nik) {
+            $filename .= '_' . $nik;
+            $filter = ['nik' => $nik];
+        }
+
+        if ($name) {
+            $filename .= '_' . $name;
+            $filter = ['name' => $name];
+        }
+
+        if ($unlat) {
+            $filename .= '_' . $unlat;
+            $filter = ['unlat' => $unlat];
+        }
+
+        if ($status) {
+            $status = explode(',', $status);
+            //            dd($status);
+            //            $filename .= '_'.$status;
+            //            $filter = ['status' => $status];
+        }
+
+        $dataUser = $this->userService->getUserList($nik, $name, $unlat, $status);
+        // echo "<pre>";
+        // print_r($dataUser);
+        // die();
+        // return Excel::download(new ReportOrder($dataReport, $filter ), "$filename.xlsx");
+        return Excel::download(new UserList($dataUser, $filter), "$filename.xlsx");
+
+        //        $this->reportorderService->generateReportUsage($dataReport);
+        //        return Excel::download(new ReportLimitUsage($dataReport), "$filename.xlsx");
+
     }
 }
