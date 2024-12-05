@@ -170,11 +170,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-left text-left">
+                                    <div class="mt-3">
+                                        <p class="text-muted font-size-sm">1. Kecintaan kepada Tuhan Yang Maha Esa di atas segala-galanya.</p>
+                                        <p class="text-muted font-size-sm">2. Setia kepada NKRI dan Undang-Undang Dasar 1945.</p>
+                                        <p class="text-muted font-size-sm">3. Berfikir, berbicara, dan berbuat yang terbaik.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <div class="mt-3">
+                                        <h4>BERPRESTASI KEWAJIBAN KAMI</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
             <!-- footer -->
-            <footer class="mt-5">
+            <!-- <footer class="mt-5">
                 <div class="footer-top bg-dark text-white p-5 ">
                     <div class="container-fluid">
                         <div class="row">
@@ -285,7 +304,7 @@
                         </div>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- end footer  -->
 
             <!-- to top -->

@@ -39,6 +39,7 @@ class DashboardController extends CoreController
     {
         return view('admin.contents.index', [
             'menu' => ($this->menu ? $this->menu : ''),
+            'allunlat' => $this->unlatService->all(),
             'unlat' => $this->unlatService->count(),
             'all_user' => $this->userService->countAll(),
             'user_aktif' => $this->userService->countActif(),
@@ -177,5 +178,13 @@ class DashboardController extends CoreController
         //        }
         //
         //        return new JsonResponse(['status' => 'OK', 'files' => '']);
+    }
+
+    public function getCardData(Request $request)
+    {
+        $areaId = $request->get('area_id');
+        $dataCard = $this->dashboardService->getCardData($areaId);
+        //        $dataChart = $this->dashboardanalyticService->getChartData($areaId);
+        return response()->json(['data' => $dataCard], 200);
     }
 }

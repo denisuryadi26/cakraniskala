@@ -32,6 +32,28 @@
   </div>
 </div> -->
 
+<div class="row" id="filterArea">
+    <div class="col-sm-9">
+
+    </div>
+    <div class="col-sm-3">
+        <fieldset class="form-group floating-label-form-group">
+            <div class="controls">
+
+                <select class="select2 form-control form-control-lg" id="unlat_id" style="padding:10px !important;">
+                    <option value="" selected class="text-center">-- SELECT UNLAT --</option>
+                    @foreach($allunlat as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+
+                </select>
+
+            </div>
+        </fieldset>
+    </div>
+</div>
+<br />
+
 <div class="row">
     <div class="col-md-6 col-xl-3">
         <div class="widget-rounded-circle card">
@@ -119,5 +141,82 @@
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    var url = {
+        getData: "{{route('dashboard_get_card_data')}}"
+    };
+    $(document).ready(function() {
+        // getMapData();
+        // console.log(mapData)
+        // getMapData();
+        generateCardData();
+        getChartData();
+        // chartData = getChartData();
+        // console.log(chartData);
+        // generateChart(chartData,'reseller-chart','donut');
+        var CSRF_TOKEN = "{{@csrf_token()}}";
+        table = $('#contentTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: url.table,
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    title: '#',
+                    width: '2%'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    width: '15%'
+                },
+            ]
+        });
 
+        $(document).on('change', '#unlat_id', function(e) {
+            let areaId = $(this).val();
+
+            showLoading();
+            generateCardData(areaId)
+            // chartData = getChartData(areaId);
+            // generateChart(chartData,'reseller-chart','donut')
+            let resp = {
+                'status': 'success',
+                'message': 'Data is successfully updated'
+            }
+            swalStatus(resp, "", '');
+        })
+
+    });
+
+    function generateCardData(areaId) {
+        $.get(url.getData, {
+            area_id: areaId
+        }, function(response) {
+            // let result = JSON.parse(response);
+
+            $('#tot_reseller').text(thousands_separators(response.data.total_reseller))
+            // $('#tot_agent').text(thousands_separators(response.data.total_agent))
+            $('#tot_approval').text(thousands_separators(response.data.total_approval))
+            $('#tot_product').text(thousands_separators(response.data.total_product))
+            $('#tot_category').text(thousands_separators(response.data.total_category))
+            $('#tot_principal').text(thousands_separators(response.data.total_principal))
+            $('#tot_brand').text(thousands_separators(response.data.total_brand))
+        });
+    }
+
+    function callData(ajaxurl, areaId) {
+
+        return $.ajax({
+            url: ajaxurl,
+            type: 'GET',
+            data: {
+                "area_id": areaId
+            },
+        });
+    };
+</script>
 @endsection

@@ -68,6 +68,7 @@ Auth::routes();
 Route::group(['prefix' => 'administrator', 'middleware' => ['auth', 'roles']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/delete_file', [DashboardController::class, 'deleteFileContent'])->name('file_delete');
+    Route::get('/getCardData', [DashboardController::class, 'getCardData'])->name('dashboard_get_card_data');
 
 
     Route::group(['prefix' => 'sequencecodes'], function () {
