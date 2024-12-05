@@ -164,7 +164,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Login</a>
+                                        <a class="btn btn-info " target="__blank" href="https://cakraniskala.web.id/login">Login</a>
                                     </div>
                                 </div>
                             </div>
