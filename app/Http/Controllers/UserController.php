@@ -153,6 +153,7 @@ class UserController extends CoreController
      */
     public function destroy(Request $request)
     {
+        // dd($request);
         $id  = $request->only('id');
         $this->userRepository->destroy($id);
 
