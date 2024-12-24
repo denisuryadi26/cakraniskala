@@ -487,14 +487,15 @@
                     dataType: 'json',
                     contentType: false,
                     processData: false,
-                    success: function(response) {
-                        Swal.fire({
-                            title: "Update Success",
-                            text: response.message,
-                            type: "success"
-                        }).then(function() {
-                            window.location.reload();
-                        });
+                    success: function(result) {
+                        swalStatus(result, "myModal", '', table)
+                        // Swal.fire({
+                        //     title: "Update Success",
+                        //     text: response.message,
+                        //     type: "success"
+                        // }).then(function() {
+                        //     window.location.reload();
+                        // });
                     }
                 });
                 event.preventDefault();
