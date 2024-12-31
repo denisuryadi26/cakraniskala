@@ -149,7 +149,7 @@
                                         <h6 class="mb-0">Tanggal Lahir</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{ $user->tgl_lahir }}
+                                        {{ \Carbon\Carbon::parse($user->tgl_lahir)->format('d-m-Y') }}
                                     </div>
                                 </div>
                                 <hr>

@@ -147,6 +147,7 @@ class UserService extends CoreService
                 $delete_btn = '';
                 $update_btn = '';
                 $view_btn = '';
+                $biodata_btn = '';
                 $code = $model->code;
                 $parent_id = null;
 
@@ -176,7 +177,13 @@ class UserService extends CoreService
                            </button>";
                 }
 
-                $action = $view_btn . $update_btn . $delete_btn;
+                $biodata_btn = "<a href='" . route('biodata', ['id' => $model->code]) . "' target='_blank'
+                                class='btn btn-icon btn-secondary btn-glow mr-1 mb-1' data-toggle='tooltip'
+                                data-placement='top' title='Open Biodata' style='margin:3px'>
+                                    <i class='tf-icons ti ti-users'></i>
+                                </a>";
+
+                $action = $view_btn . $update_btn . $delete_btn . $biodata_btn;
                 return $action;
             })
             ->make(true);
