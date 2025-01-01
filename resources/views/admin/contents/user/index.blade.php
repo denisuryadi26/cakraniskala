@@ -83,6 +83,21 @@
                                 </div>
                             </div>
 
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-3 col-form-label">
+                                        <label for="filterskta">KTA</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2" id="filterkta" name="filterkta">
+                                            <option value="" selected disabled>Pilih Status KTA</option>
+                                            <option value="1">YA</option>
+                                            <option value="0">Tidak</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <br />
                             <br />
                             <br />
@@ -119,7 +134,7 @@
                             <th width="3%" class="text-center">No</th>
                             <th>Nama Lengkap</th>
                             <th>Profile</th>
-                            <th>Dokument</th>
+                            <th>KTA</th>
                             <th>Username</th>
                             <th>Kode Anggota</th>
                             <!-- <th>Email</th> -->
@@ -218,7 +233,8 @@
             let filternik = $('#filternik').val(),
                 filtername = $('#filtername').val(),
                 filterstatus = $('#filterstatus').val(),
-                filterunlat = $('#filterunlat').val();
+                filterunlat = $('#filterunlat').val(),
+                filterkta = $('#filterkta').val();
 
             let finalUrl = url.download; // Base URL
             let params = []; // Array untuk menampung parameter query string
@@ -235,6 +251,9 @@
             }
             if (filterunlat) {
                 params.push(`unlat=${encodeURIComponent(filterunlat)}`);
+            }
+            if (filterkta) {
+                params.push(`is_kta=${encodeURIComponent(filterkta)}`);
             }
 
             // Gabungkan base URL dengan parameter query string jika ada
@@ -258,8 +277,9 @@
                 let filtername = $('#filtername').val();
                 let filterstatus = $('#filterstatus').val();
                 let filterunlat = $('#filterunlat').val();
+                let filterkta = $('#filterkta').val();
                 $('#contentTable').dataTable().fnDestroy();
-                loadDataTable(filternik, filtername, filterstatus, filterunlat);
+                loadDataTable(filternik, filtername, filterstatus, filterunlat, filterkta);
                 // let data = $('#formFilter').serialize();
 
 
@@ -713,7 +733,7 @@
 
     });
 
-    function loadDataTable(filternik, filtername, filterstatus, filterunlat) {
+    function loadDataTable(filternik, filtername, filterstatus, filterunlat, filterkta) {
         table = $('#contentTable').DataTable({
             processing: true,
             serverSide: true,
@@ -725,6 +745,7 @@
                     'name': filtername,
                     'status': filterstatus,
                     'unlat': filterunlat,
+                    'is_kta': filterkta,
                 }
             },
             columns: [{
@@ -756,7 +777,7 @@
                     }
                 },
                 {
-                    data: "dokument",
+                    data: "kta",
                     className: 'dt-center',
                     "render": function(data) {
 

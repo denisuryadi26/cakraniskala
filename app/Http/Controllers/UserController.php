@@ -176,12 +176,14 @@ class UserController extends CoreController
         $name = $request->get('name');
         $status = $request->get('status');
         $unlat = $request->get('unlat');
+        $is_kta = $request->get('is_kta');
         // dd($nik);
         $filter = [
             'nik' => $nik,
             'name' => $name,
             'status' => $status,
             'unlat' => $unlat,
+            'is_kta' => $is_kta,
         ];
         // return $this->userService->loadDataTable($request);
         return $this->load_data_table($this->userRepository, $filter);
@@ -203,6 +205,7 @@ class UserController extends CoreController
         $unlat = $request->get('unlat');
         $nik = $request->get('nik');
         $name = $request->get('name');
+        $is_kta = $request->get('is_kta');
         // dd($request);
         $filename = "user_list";
         $filter = [];
@@ -222,6 +225,11 @@ class UserController extends CoreController
             $filter = ['unlat' => $unlat];
         }
 
+        if ($is_kta) {
+            $filename .= '_' . $is_kta;
+            $filter = ['is_kta' => $is_kta];
+        }
+
         if ($status) {
             $status = explode(',', $status);
             //            dd($status);
@@ -229,7 +237,7 @@ class UserController extends CoreController
             //            $filter = ['status' => $status];
         }
 
-        $dataUser = $this->userService->getUserList($nik, $name, $unlat, $status);
+        $dataUser = $this->userService->getUserList($nik, $name, $unlat, $status, $is_kta);
         // echo "<pre>";
         // print_r($dataUser);
         // die();

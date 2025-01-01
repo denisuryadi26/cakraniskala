@@ -61,7 +61,7 @@ class UserService extends CoreService
         return $this->userRepository->all();
     }
 
-    public function getUserList($nik = null, $name = null, $unlat = null, $status = null)
+    public function getUserList($nik = null, $name = null, $unlat = null, $status = null, $is_kta = null)
     {
 
         $data = User::withoutTrashed()->with(['group', 'agama', 'sabuk', 'unlat', 'kategori'])
@@ -81,6 +81,10 @@ class UserService extends CoreService
 
         if ($status) {
             $data->whereIn('status', $status);
+        }
+
+        if ($is_kta) {
+            $data->where(DB::raw('is_kta'), $is_kta);
         }
 
         // dd($data->get());
@@ -140,6 +144,9 @@ class UserService extends CoreService
         if (isset($filter) && $filter['unlat']) {
             $model->where(['unlat_id' => $filter['unlat']]);
         }
+        if (isset($filter['is_kta']) && $filter['is_kta'] !== null) {
+            $model->where(['is_kta' => $filter['is_kta']]);
+        }
 
         $data = DataTables::of($model)->addIndexColumn()
 
@@ -177,11 +184,13 @@ class UserService extends CoreService
                            </button>";
                 }
 
-                $biodata_btn = "<a href='" . route('biodata', ['id' => $model->code]) . "' target='_blank'
-                                class='btn btn-icon btn-secondary btn-glow mr-1 mb-1' data-toggle='tooltip'
-                                data-placement='top' title='Open Biodata' style='margin:3px'>
-                                    <i class='tf-icons ti ti-users'></i>
-                                </a>";
+                if (!is_null($model->code)) {
+                    $biodata_btn = "<a href='" . route('biodata', ['id' => $model->code]) . "' target='_blank'
+                                                class='btn btn-icon btn-secondary btn-glow mr-1 mb-1' data-toggle='tooltip'
+                                                data-placement='top' title='Open Biodata' style='margin:3px'>
+                                                    <i class='tf-icons ti ti-users'></i>
+                                                </a>";
+                }
 
                 $action = $view_btn . $update_btn . $delete_btn . $biodata_btn;
                 return $action;
